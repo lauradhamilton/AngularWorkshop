@@ -1,0 +1,10 @@
+<div class='restaurantList'>
+    <div class="row" ng-repeat="restaurant in restaurants | filter:query:strict | orderBy:orderProp">
+        <div class="large-12 columns">
+            <div class="callout panel">
+                <nvisia-restaurant restaurant="restaurant"></nvisia-restaurant>
+                <nvisia-button href="#/restaurant/{{restaurant.id}}">Show Times</nvisia-button>
+            </div>
+        </div>
+    </div>
+</div>

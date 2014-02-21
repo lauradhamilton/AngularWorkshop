@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<!--
+  ~ The MIT License (MIT)
+  ~
+  ~ Copyright (c) 2014 © NVISIA, LLC.
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in
+  ~ all copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+  ~ THE SOFTWARE.
+  -->
+<html class="no-js" lang="en" ng-app="restaurantReservationApp">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>AngularJS SPA Workshop - Restaurant Reservation System</title>
+
+    <link rel="stylesheet" href="css/base.css"/>
+
+    <!--General Library includes -->
+
+    <script type="text/javascript" src="libs/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="libs/json2.js"></script>
+    <script type="text/javascript" src="libs/underscore.js"></script>
+
+    <!--Angular library includes-->
+    <script type="text/javascript" src="libs/angular.js"></script>
+    <script src="libs/angular-route.js"></script>
+    <script type="text/javascript" src="libs/angular-resource.js"></script>
+
+    <!-- Application includes -->
+    <script src="js/app.js"></script>
+    <script src="js/directives.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/formatters.js"></script>
+    <script src="js/services.js"></script>
+
+</head>
+
+<body class="restaurant">
+
+<div class="row">
+    <div class="large-12 columns">
+        <div style="display: inline-block;">
+            <img src="img/icon_01.png" width="90px;"/>
+        </div>
+        <div style="display: inline-block;">
+            <h1 class="title-main">Easy Reservations</h1>
+
+            <p class="title-sub">Simply choose a restaurant, a time, and submit your reservation!</p>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+
+    <div ng-view class="large-8 medium-8 columns"></div>
+
+    <div class="large-4 medium-4 columns">
+        <!--
+                    <div class="panel">
+                        <label>Search Name:</label> <input ng-model="query.name">
+                        <label>Sort By:</label> <select class="dropdown" ng-model="orderProp">
+                            <option value="name">Alphabetical</option>
+                            <option value="price">Price</option>
+                            <option value="-rating">Rating</option>
+                        </select>
+                    </div>
+        -->
+        <div class="panel">
+            <h5>Other/Login?:</h5>
+
+            <p>Login for or other info here?</p>
+        </div>
+        <div class="panel">
+            <h5>There is so much more!</h5>
+
+            <p>This is but one example with Angular, there is so much more possible!</p>
+            <a href="http://docs.angularjs.org/guide/" class="small button">Go to Angular Docs</a>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" href="css/foundation.css"/>
+<script type="text/javascript" src="libs/modernizr.js"></script>
+<script type="text/javascript" src="libs/foundation.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(document).foundation();
+    });
+</script>
+
+</body>
+</html>

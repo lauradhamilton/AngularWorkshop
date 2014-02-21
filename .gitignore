@@ -1,0 +1,5 @@
+node_modules/
+server/restaurants.db
+server/reservations.db
+.idea/
+*.iml

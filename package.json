@@ -1,0 +1,16 @@
+{
+    "name": "nodeserver",
+    "description": "Node Rest Server",
+    "version": "0.0.1",
+    "private": true,
+    "dependencies": {
+        "express": "3.4.7",
+        "underscore": "1.5.2",
+        "stdio": "0.1.4",
+        "handlebars": "1.3.0",
+        "workshop-server": "https://github.com/NVISIA/WorkshopServer/tarball/1.0",
+        "nedb": "0.9.4",
+        "karma": "0.10.9",
+        "karma-junit-reporter": "0.2.1"
+    }
+}

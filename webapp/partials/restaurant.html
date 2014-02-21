@@ -1,0 +1,17 @@
+<p>
+    <strong>{{restaurant.name}}</strong><br/>
+    <span ng-if="restaurant.tagline">{{restaurant.tagline}}</span>
+</p>
+
+<div class="row">
+    <div class="large-3 medium-6 small-12 columns">
+        <p>Price: {{restaurant.price|priceFormatter}}</p>
+    </div>
+    <div class="large-3 medium-6 small-12 columns">
+        <p>Rating: {{restaurant.rating|ratingFormatter}}</p>
+    </div>
+    <div class="large-6 medium-12 small-12 columns">
+        <p>Address: {{restaurant.address}}</p>
+    </div>
+</div>
+<p>Description: {{restaurant.description}} </p>

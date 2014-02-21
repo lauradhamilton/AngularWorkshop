@@ -1,0 +1,40 @@
+
+body.restaurant {
+    background-image: url("../img/retro_bg_2.jpg");
+    font-family: Georgia, Times, "Times New Roman", serif;
+}
+
+.title-main {
+    color: #f2821e;
+    font-family: Georgia, Times, "Times New Roman", serif;
+    margin-bottom: -0.6rem;
+}
+
+.title-sub {
+    color: #f2821e;
+    font-family: Georgia, Times, "Times New Roman", serif;
+}
+
+.error-box {
+    color: red;
+}
+
+.error-box ul {
+    list-style-type: none;
+}
+
+input[type="text"].invalid,
+input[type="number"].invalid {
+    border: 2px solid red;
+    background: yellow;
+    font-size: 1.1em;
+}
+
+
+.css-form input.ng-invalid.ng-dirty {
+    background-color: #FA787E;
+}
+
+.css-form input.ng-valid.ng-dirty {
+    background-color: #78FA89;
+}
