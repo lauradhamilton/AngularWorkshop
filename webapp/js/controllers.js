@@ -34,6 +34,8 @@ restaurantReservationControllers.controller('RestaurantDetailController', ['$sco
             $scope.selectedTime = selectedTime;
         };
     }]);
+
+
 restaurantReservationControllers.controller('ReservationFormController',['$scope','$location','Restaurant','Reservation',
     function ($scope, $location, Restaurant, Reservation) {
         $scope.makeReservation = function () {

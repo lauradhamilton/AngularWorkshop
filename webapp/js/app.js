@@ -1,3 +1,6 @@
+
+"use strict";
+
 var restaurantReservationApp = angular.module('restaurantReservationApp', [
     'ngRoute',
     'restaurantReservationControllers',

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # install node dependencies
-sudo npm install
+npm install
 
 # bootstrap the database if it doesn't exist
 [ ! -f node_modules/workshop-server/data/restaurants.db ] && ./reset.sh

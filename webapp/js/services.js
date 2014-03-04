@@ -2,6 +2,7 @@
  * Created by bpeterson on 1/27/14.
  */
 
+"use strict";
 var restaurantServices = angular.module('restaurantServices', ['ngResource']);
 
 restaurantServices.factory('Restaurant', ['$resource',

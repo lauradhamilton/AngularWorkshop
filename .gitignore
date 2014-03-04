@@ -1,5 +1,7 @@
 node_modules/
 server/restaurants.db
 server/reservations.db
+webapp/coverage/
+presentation/node_modules/
 .idea/
 *.iml
