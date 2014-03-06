@@ -22,7 +22,7 @@
   ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
   ~ THE SOFTWARE.
   -->
-<html class="no-js" lang="en" >
+<html class="no-js" lang="en" ng-app="restaurantReservationApp">
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -66,10 +66,10 @@
 </div>
 
 <div class="row">
-    <div >
+    <div ng-controller="RestaurantListController">
         <div id="restaurant-list-main" class="large-8 medium-8 columns">
             <div class='restaurantList'>
-                <div class="row" >
+                <div class="row" ng-repeat="restaurant in restaurants |filter:query:strict">
                     <div class="large-12 columns">
                         <div class="callout panel">
                             <p><strong>{{restaurant.name}}</strong></p>
