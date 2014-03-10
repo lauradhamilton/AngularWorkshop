@@ -1,7 +1,7 @@
 <div class="row">
     <div class="large-12 columns">
         <div class="callout panel">
-            <div ng-include src="'partials/restaurant.html'"/>
+            <nvisia-restaurant restaurant="restaurant"></nvisia-restaurant>
             <div ng-include src="'partials/available-times.html'"/>
             <div ng-if="selectedTime" ng-include src="'partials/restaurant-reservation-form.html'"></div>
         </div>
