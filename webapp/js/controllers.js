@@ -27,7 +27,7 @@
 
 // Create bootstrap module based on ng-app name.
 // First argument matches the ng-app directive in index.html.
-var restaurantReservationModule = new angular.module('restaurantReservationApp', []);
+var restaurantReservationModule = new angular.module('restaurantReservationApp', ['formatters']);
 
 // RestaurantListController is the ng-controller value in index.html. It identifies the DOM element that this controller 'controls'
 restaurantReservationModule.controller('RestaurantListController', function ($scope) {
