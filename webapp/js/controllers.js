@@ -27,21 +27,38 @@
 
 // Create bootstrap module based on ng-app name.
 // First argument matches the ng-app directive in index.html.
-var restaurantReservationModule = new angular.module('restaurantReservationApp', ['formatters', 'restaurantServices']);
+var restaurantReservationModule = new angular.module('restaurantReservationControllers', ['formatters', 'restaurantServices']);
 
 // RestaurantListController is the ng-controller value in index.html. It identifies the DOM element that this controller 'controls'
 restaurantReservationModule.controller('RestaurantListController', function ($scope, Restaurant) {
     Restaurant.GetAllRestaurants().success(function (restaurants) {
         $scope.restaurants = restaurants;
+        $scope.orderProp = 'name'; // Defaults the order property to the Name value.
     });
 
 /// End of Restaurant List Controller. Needs to contain the restaurant array since we don't want it global.
 });
 
 // Create a Restaurant Detail Controller
+restaurantReservationModule.controller('RestaurantDetailController', function ($scope, $routeParams, Restaurant) {
+    Restaurant.GetRestaurant({restaurantId: $routeParams.id}).success(function (restaurant) {
+        $scope.restaurant = restaurant;
+    });
 
+    Restaurant.GetReservations({restaurantId: $routeParams.id}).success(function (data) {
+        $scope.available = data.available;
+    });
+
+    $scope.selectTime = function (selectedTime) {
+        $scope.selectedTime = selectedTime;
+    };
+
+/// End of Restaurant List Controller. Needs to contain the restaurant array since we don't want it global.
+});
 
 // Create a Reservation Form Controller
+restaurantReservationModule.controller('ReservationFormController', function ($scope, $location, Restaurant) {
 
+});
 
 // Create a Reservation Detail Controller
