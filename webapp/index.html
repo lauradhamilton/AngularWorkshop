@@ -70,7 +70,7 @@
         <div id="restaurant-list-main" class="large-8 medium-8 columns">
             <div class='restaurantList'>
                 <input type="text" ng-model="query" placeholder="Search for restaurant"/>
-                <div class="row" ng-repeat="restaurant in restaurants |filter:query:strict">
+                <div class="row" ng-repeat="restaurant in restaurants |filter:query:strict | orderBy:'name'">
                     <div class="large-12 columns">
                         <div class="callout panel">
                             <p>
