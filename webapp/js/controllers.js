@@ -43,6 +43,7 @@ restaurantReservationModule.controller('RestaurantListController', function ($sc
      {"name": "Harbor House", "cuisine": "Seafood", "tagline": "Harbor House Serves Great Seafood with a View.", "description": "Seafood - Steaks - Raw Bar - Cocktails", "address": "550 Harbor Dr", "rating": 78, "price": 4, "_id": "to3XNLNxlHDsz79S"},
      {"name": "Eddie Martini's", "cuisine": "Steakhouse", "tagline": "Our main goal: complete guest satisfaction.", "description": "Eddie Martini's is a 1940's style fine dining restaurant, featuring the freshest in steaks, chops and seafood. Our main goal: complete guest satisfaction.  We will accomplish this by offering service above and beyond our guests' expectations, preparing and serving food and beverages of high, consistent quality and creating an atmosphere that satisfies the wants and needs of our guests in ambiance and decor.", "address": "8612 W Watertown Plank Rd", "rating": 83, "price": 4, "_id": "xnbvJsxyX8NIsabi"}
  ];
+});
 /// End of Restaurant List Controller. Needs to contain the restaurant array since we don't want it global.
 
 // Create a Restaurant Detail Controller
