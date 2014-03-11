@@ -30,11 +30,34 @@ input[type="number"].invalid {
     font-size: 1.1em;
 }
 
-
 .css-form input.ng-invalid.ng-dirty {
     background-color: #FA787E;
 }
 
 .css-form input.ng-valid.ng-dirty {
     background-color: #78FA89;
+}
+
+.sample-body{
+    background: #002b36;
+}
+.sample-header {
+    background-color: #f2821e;
+    color: white;
+}
+.sample-row > pre{
+    color: white;
+}
+.sample-box {
+    border: 2px solid #F08D32;
+    background: white;
+    font-size: 2em;
+    border-radius: 10px;
+}
+.sample-box > .row > .nested {
+    background: #d1d1d1;
+}
+.sample-box > .row > .nested p {
+    font-family: monospace;
+    font-size: .33em;
 }
