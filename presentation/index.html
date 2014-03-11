@@ -479,27 +479,28 @@
     <!-- Automatic Bootstrapping-->
     <section>
         <aside class="notes">
-        <p><html class="no-js" lang="en" ng-app="restaurantReservationApp" /></p>
         </aside>
         <h3>Bootstrapping Angular JS</h3>
         <span style="font-size:  1.25rem;">
         <pre class="brush: js; ">
+        <!-- index.html -->
         &lt;html class="no-js" lang="en" ng-app="restaurantReservationApp" &gt;
-        &lt;body&gt;
-            ... omitted ...
-        &lt;/body&gt;
+            &lt;body&gt;
+                ... omitted ...
+            &lt;/body&gt;
         &lt;/html&gt;
-            /* End */
+        /* End */
         </pre>
         </span>
+        <br>
         <span style="font-size:  1.25rem;">
         <pre class="brush: js; ">
         /*
-         * Create bootstrap module based on ng-app name. (controllers.js)
+         * Create bootstrap module based on ng-app name. (app.js)
          */
 
-        var restaurantReservationModule =
-			new angular.module('restaurantReservationApp', ['formatters']);
+        var restaurantReservationApp =
+			new angular.module('restaurantReservationApp', []);
 
         /* End */
         </pre>
@@ -519,7 +520,9 @@
          * It identifies the DOM element that this controller 'controls'
          */
 
-		 restaurantReservationModule.controller('RestaurantListController', function ($scope) {
+         var restaurantReservationControllers = new angular.module('restaurantReservationControllers', []);
+
+		 restaurantReservationControllers.controller('RestaurantListController', function ($scope) {
 			$scope.restaurants = [
 				{some restaurant information here},
 				{more restaurant information}
@@ -538,6 +541,7 @@
         <h3>Specify Controller Class</h3>
         <span style="font-size:  1.25rem;">
         <pre class="brush: js; highlight:[6]">
+
         /*
          * A List of Restaurants    (index.html)
          */
@@ -547,7 +551,10 @@
 				<div id="restaurant-list-main" class="large-8 medium-8 columns">
 					<div class='restaurantList'>
 					...
-		</div></div></div></div>
+		            </div>
+                </div>
+            </div>
+        </div>
         /* End */
         </pre>
         </span>
@@ -556,7 +563,114 @@
         <aside class="notes">
         </aside>
         <h3>Dependency Injection</h3>
-        TODO: add content
+        <span style="font-size:  1.25rem;">
+        <pre class="brush: js; highlight:[6,7]">
+        /*
+         * Create bootstrap module based on ng-app name. (app.js)
+         */
+
+        var restaurantReservationApp = angular.module('restaurantReservationApp', [
+            'restaurantReservationControllers',
+            'formatters'
+        ]);
+
+        /* End */
+        </pre>
+        </span>
+    </section>
+</section>
+<section>
+    <section>
+        <h3>Exercise #1</h3>
+        <ul>
+            <li>Add Bootstrap to index.html</li>
+            <li>Create Application Module with Dependencies</li>
+            <li>Creating a Controller</li>
+        </ul>
+    </section>
+    <section>
+        <h3>Bootstrap Application and Specify Controller</h3>
+        <span style="font-size:  1.25rem;">
+        <pre class="brush: js; highlight:[2,8]">
+            <!--  Add Bootstrap -->
+            &lt;html class="no-js" lang="en" ng-app="restaurantReservationApp"&gt;
+                ... omitted...
+            &lt;body class="restaurant"&gt;
+
+                <div class="row">
+                    <!-- Add controller for Restaurant List -->
+                    <div ng-controller="RestaurantListController">
+                        <div id="restaurant-list-main" class="large-8 medium-8 columns">
+                            ...omitted...
+                        </div>
+                    </div>
+                </div>
+            &lt;/body&gt;
+        </pre>
+        </span>
+    </section>
+    <!-- Application Module -->
+    <section>
+        <h3>Application Module with Dependencies Injected</h3>
+                <span style="font-size:  1.25rem;">
+        <pre class="brush: js; ">
+        /*
+         * Create bootstrap module based on ng-app name. (app.js)
+         */
+
+        var restaurantReservationApp = angular.module('restaurantReservationApp', [
+            'restaurantReservationControllers',
+            'formatters'
+        ]);
+        /* End */
+        </pre>
+        </span>
+    </section>
+    <!--Controller Module for Restaurant List-->
+    <section>
+        <h3>Creating a Controller</h3>
+        <span style="font-size:  1.25rem;">
+        <pre class="brush: js; ">
+        /*
+         * Create Controllers module. (controllers.js)
+         */
+
+        var restaurantReservationControllers =
+            new angular.module('restaurantReservationControllers', []);
+
+        // RestaurantListController is the ng-controller value in index.html.
+        // It identifies the DOM element that this controller 'controls'
+        restaurantReservationControllers.controller('RestaurantListController', function ($scope) {
+
+            $scope.restaurants = [
+                {"name": "Shogun", "cuisine": "Sushi",  ...
+                    ...
+                {"name": "Eddie Martini's", "cuisine": "Steakhouse", ...
+            ];
+        });
+        /* End */
+        </pre>
+        </span>
+    </section>
+    <section>
+        <h3>Test our results</h3>
+
+        <p>Launch your node.js server and test the changes. (run.sh or run.bat)</p>
+
+        <a href="http://localhost:9000/index.html" target="_blank">http://localhost:9000/index.html</a>
+
+        <p style="padding-top: 1em;">Link to solution source: </p>
+        <blockquote>
+            <ul>
+                <li><a href="https://github.com/NVISIA/AngularWorkshop/blob/ex1-solution/webapp/js/app.js" target="_blank">app.js</a>
+                </li>
+                <li><a href="https://github.com/NVISIA/AngularWorkshop/blob/ex1-solution/webapp/index.html" target="_blank">index.html</a>
+                </li>
+                <li><a href="https://github.com/NVISIA/AngularWorkshop/blob/ex1-solution/webapp/js/controllers.js" target="_blank">controllers.js</a>
+                </li>
+            </ul>
+        </blockquote>
+
     </section>
 
     <section>
