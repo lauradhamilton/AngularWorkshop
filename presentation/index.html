@@ -512,8 +512,8 @@
         <aside class="notes">
         </aside>
         <h3>Creating a Controller</h3>
-        <span style="font-size:  1.25rem;">
-        <pre class="brush: js; highlight:[7,8]">
+        <span style="font-size:  1.1rem;">
+        <pre class="brush: js; highlight:[7,8,9]">
         /*
          * Add a Controller to provide the Restaurant List. (controllers.js)
          * RestaurantListController is the ng-controller value in index.html.
@@ -629,7 +629,7 @@
     <!--Controller Module for Restaurant List-->
     <section>
         <h3>Creating a Controller</h3>
-        <span style="font-size:  1.25rem;">
+        <span style="font-size:  1.1rem;">
         <pre class="brush: js; ">
         /*
          * Create Controllers module. (controllers.js)
@@ -697,28 +697,51 @@
 <section>
     <section>
         <aside class="notes">
-            <strong>Clearly explain approach for exercises.</strong>
-            <ol>
-                <li>walk through code</li>
-                <li>answer any questions</li>
-                <li>Provide code on screen or via a link</li>
-                <li>assist getting it to work.</li>
-                <li>provide a reset point</li>
-            </ol>
         </aside>
-        <h3>Exercise #2 - HTML Binding</h3>
+        <h3>HTML Binding</h3>
         <ul>
+            <li>curly braces {{ }} and ng-bind</li>
             <li>ng-repeat</li>
+            <li>binding with ng-model</li>
             <li>query and filter</li>
-            <li>binding with ng-model, ng-bind, and curly braces</li>
         </ul>
     </section>
     <section>
-        <h3>ng-repeat</h3>
+        <aside class="notes">
+            ng-bind is similar to {{  }}
+            {{ }} is less verbose but needs to be ng-cloak to avoid early render with {{ }}.
+            Enter name: <input type="text" ng-model="name"><br>
+            Hello <span ng-bind="name"></span>!
+        </aside>
+        <h3>ng-bind</h3>
         <span style="font-size:  1.25rem;">
+        <pre class="brush: js; highlight:[7,10,13]">
+		/**
+		 * ng-bind and curly braces binding (index.html)
+		 **/
+            ...
+        <div class="row">
+            <div class="large-3 medium-6 small-12 columns">
+                <p>Price: {{restaurant.price|priceFormatter}}</p>
+            </div>
+            <div class="large-3 medium-6 small-12 columns">
+                <p>Rating: {{restaurant.rating|ratingFormatter}}</p>
+            </div>
+            <div class="large-6 medium-12 small-12 columns">
+                <p>Address: <span ng-bind="restaurant.address"></span></p>
+            </div>
+        </div>
+            ...
+		/* end */
+		</pre>
+		</span>
+    </section>
+    <section>
+        <h3>ng-repeat</h3>
+        <span style="font-size:  1.1rem;">
         <pre class="brush: js; highlight:[9]">
 		/**
-		 * ng-bind and curley braces binding (index.html)
+		 * ng-repeat (index.html)
 		 **/
 		<div class="row">
 			<div ng-controller="RestaurantListController">
@@ -730,12 +753,39 @@
 
 							...
 
-		</div></div></div></div></div></div>
+		                    </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 		/* end */
 		</pre>
 		</span>
     </section>
 
+    <section>
+        <h3>ng-model</h3>
+        <span style="font-size:  1.2rem;">
+        <pre class="brush: js; highlight:[4,10]">
+            /*
+             * ng-model (reservation form partial)
+            */
+        <div ng-controller="ReservationFormController">
+            <form name="reservationForm" novalidate class="css-form">
+                <div class="row">
+                    ...omitted...
+                    <div class="large-6 columns">
+                        <label>Number of Guests</label>
+                        <input type="number" name="guests" ng-model="reservation.guests"/>
+                    </div>
+                </div>
+                ...omitted...
+            </form>
+        </div>
+        </pre>
+        </span>
+    </section>
     <section>
         <h3>Quering</h3>
         <span style="font-size:  1.25rem;">
@@ -765,64 +815,38 @@
 		</pre>
 		</span>
     </section>
-
+</section>
+<section>
     <section>
-        <h3>ng-model Binding</h3>
-        <span style="font-size:  1.25rem;">
-        <pre class="brush: js; highlight:[8]">
-		/**
-		 * ng-model binding (index.html)
-		 **/
-		<div class="row">
-			<div ng-controller="RestaurantListController">
-				<div id="restaurant-list-main" class="large-8 medium-8 columns">
-					<div class='restaurantList'>
-						<input type="text" ng-model="query" placeholder="Search for restaurant"/>
-						...
-		</div></div></div></div>
-
-		/* end */
-		</pre>
-		</span>
+        <h3>Exercise #2</h3>
+        <ul>
+            <li>Add ng-repeat and {{ }} for Restaurant List</li>
+            <li>Add Query and Filter to search for Restaurant</li>
+        </ul>
     </section>
     <section>
-        <h3>ng-bind and Curley Braces</h3>
-        <span style="font-size:  1.25rem;">
-        <pre class="brush: js; highlight:[8,9,14]">
-		/**
-		 * ng-bind and curley braces binding (index.html)
-		 **/
-		<div class="row" ng-repeat="restaurant in restaurants |filter:query:strict">
-			<div class="large-12 columns">
-				<div class="callout panel">
-					<p>
-						<strong>{{restaurant.name}}</strong><br/>
-						<span ng-if="restaurant.tagline">{{restaurant.tagline}}</span>
-					</p>
-
-					...
-
-					<p>Description: <span ng-bind="restaurant.description"></span></p>
-
-		</div></div></div>
-		/* end */
-		</pre>
-		</span>
+        <h3>Add Restaurant List</h3>
+    </section>
+    <section>
+        <h3>Enable Search for Restaurant</h3>
     </section>
     <section>
         <h3>Test our results</h3>
 
-        <p>Launch your node.js server and test the models. (run.sh or run.bat)</p>
+        <p>Launch your node.js server and test the changes. (run.sh or run.bat)</p>
 
-        <p>
-            View the restaurants with try_it.html
-        </p>
-        <a href="http://localhost:9000/try_it.html" target="_blank">http://localhost:9000/try_it.html</a>
+        <a href="http://localhost:9000/index.html" target="_blank">http://localhost:9000/index.html</a>
 
+        <p style="padding-top: 1em;">Link to solution source: </p>
         <blockquote>
-            <p>Link to solution source: </p>
-            <a href="https://github.com/NVISIA/AngularWorkshop/blob/ex2-solution/webapp/js/restaurant.js"
-               target="_blank">restaurant.js</a>
+            <ul>
+                <li><a href="https://github.com/NVISIA/AngularWorkshop/blob/ex2-solution/webapp/js/app.js" target="_blank">app.js</a>
+                </li>
+                <li><a href="https://github.com/NVISIA/AngularWorkshop/blob/ex2-solution/webapp/index.html" target="_blank">index.html</a>
+                </li>
+                <li><a href="https://github.com/NVISIA/AngularWorkshop/blob/ex2-solution/webapp/js/controllers.js" target="_blank">controllers.js</a>
+                </li>
+            </ul>
         </blockquote>
 
     </section>
@@ -847,30 +871,61 @@
     </section>
 </section>
 
+<section>
+    <section>
+        <h3>RESTful services via $http</h3>
+        <ul>
+            <li>Connecting to REST services</li>
+        </ul>
+    </section>
+    <section>
+        <h3>Connecting to REST services</h3>
+        <span style="font-size:  1.1rem;">
+        <pre class="brush: js; ">
+            // RestaurantListController is the ng-controller value in index.html.
+            // It identifies the DOM element that this controller 'controls'
+            // This can be done a couple different ways.
+            // However, this way supports minification and tends to be the preferred method.
+            restaurantReservationControllers.controller('RestaurantListController', ['$scope', '$http',
+                function ($scope, $http) {
 
+                // Use the Angular http service to retrieve the Restaurants.
+                $http.get('/restaurants').success(function (data) {
+                    $scope.restaurants = data;
+                });
+            }]);
+        </pre>
+        </span>
+    </section>
+</section>
 <section>
     <section>
 	    <aside>
 	    </aside>
-        <h3>Exercise #3 - Getting some REST</h3>
+        <h3>Exercise #3</h3>
         <ul>
             <li>Replace static restaurant list with $http</li>
-            <li></li>
         </ul>
     </section>
-    <!--Handlebars-->
     <section>
-        <h3>Exercise #3</h3>
+        <h3>REST Support</h3>
             <span style="font-size:  1.25rem;">
             <pre class="brush: js; ">
-            </pre>
-            </span>
+            /**
+             *  Add REST support for Restaurant List. (controllers.js)
+             **/
+            restaurantReservationControllers.controller('RestaurantListController', ['$scope', '$http',
+                function ($scope, $http) {
 
-    </section>
-    <section>
-        <h3>Exercise #3</h3>
-            <span style="font-size:  1.25rem;">
-            <pre class="brush: js; ">
+                    // Use the Angular http service to retrieve the Restaurants.
+                    $http.get('/restaurants').success(function (data) {
+                        $scope.restaurants = data;
+                    });
+
+                    $scope.orderProp = 'name'; // Defaults the order property to the Name value.
+
+                }]);
+
             </pre>
             </span>
 
@@ -878,18 +933,22 @@
     <section>
         <h3>Test our results</h3>
 
-        <p>Launch your node.js server and test the models. (run.sh or run.bat)</p>
+        <p>Launch your node.js server and test the changes. (run.sh or run.bat)</p>
 
-        <p>
-            View the restaurants with try_it.html
-        </p>
-        <a href="http://localhost:9000/try_it.html" target="_blank">http://localhost:9000/try_it.html</a>
+        <a href="http://localhost:9000/index.html" target="_blank">http://localhost:9000/index.html</a>
 
+        <p style="padding-top: 1em;">Link to solution source: </p>
         <blockquote>
-            <p>Link to solution source: </p>
-            <a href="https://github.com/NVISIA/AngularWorkshop/blob/ex3-solution/webapp/js/restaurant.js"
-               target="_blank">restaurant.js</a>
+            <ul>
+                <li><a href="https://github.com/NVISIA/AngularWorkshop/blob/ex3-solution/webapp/js/app.js" target="_blank">app.js</a>
+                </li>
+                <li><a href="https://github.com/NVISIA/AngularWorkshop/blob/ex3-solution/webapp/index.html" target="_blank">index.html</a>
+                </li>
+                <li><a href="https://github.com/NVISIA/AngularWorkshop/blob/ex3-solution/webapp/js/controllers.js" target="_blank">controllers.js</a>
+                </li>
+            </ul>
         </blockquote>
+
     </section>
 
     <section>
@@ -917,28 +976,42 @@
 </section>
 <section>
     <section>
-        <h3>Exercise #4 - Partials and Router</h3>
+        <h3>Partials and Router</h3>
         <ol>
+            <li>HTML Partial as a template</li>
+            <li>Using a Router</li>
+            <li>Connect Partials to the Controller</li>
+        </ol>
+    </section>
+</section>
+<section>
+    <section>
+        <h3>Exercise #4</h3>
+        <ul>
             <li>Create a Partial</li>
             <li>Add the Router</li>
             <li>Connect Partials to the Controller</li>
-        </ol>
+        </ul>
     </section>
     <section>
         <h3>Test our results</h3>
 
-        <p>Launch your node.js server and test the models. (run.sh or run.bat)</p>
+        <p>Launch your node.js server and test the changes. (run.sh or run.bat)</p>
 
-        <p>
-            View the restaurants with try_it.html
-        </p>
-        <a href="http://localhost:9000/try_it.html" target="_blank">http://localhost:9000/try_it.html</a>
+        <a href="http://localhost:9000/index.html" target="_blank">http://localhost:9000/index.html</a>
 
+        <p style="padding-top: 1em;">Link to solution source: </p>
         <blockquote>
-            <p>Link to solution source: </p>
-            <a href="https://github.com/NVISIA/AngularWorkshop/blob/ex4-solution/webapp/js/restaurant.js"
-               target="_blank">restaurant.js</a>
+            <ul>
+                <li><a href="https://github.com/NVISIA/AngularWorkshop/blob/ex4-solution/webapp/js/app.js" target="_blank">app.js</a>
+                </li>
+                <li><a href="https://github.com/NVISIA/AngularWorkshop/blob/ex4-solution/webapp/index.html" target="_blank">index.html</a>
+                </li>
+                <li><a href="https://github.com/NVISIA/AngularWorkshop/blob/ex4-solution/webapp/js/controllers.js" target="_blank">controllers.js</a>
+                </li>
+            </ul>
         </blockquote>
+
     </section>
     <section>
         <aside class="notes">
