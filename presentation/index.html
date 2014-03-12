@@ -701,9 +701,9 @@
         <h3>HTML Binding</h3>
         <ul>
             <li>curly braces {{ }} and ng-bind</li>
-            <li>ng-repeat</li>
+            <li>query and ng-repeat</li>
             <li>binding with ng-model</li>
-            <li>query and filter</li>
+            <li>filter</li>
         </ul>
     </section>
     <section>
@@ -741,7 +741,7 @@
         <span style="font-size:  1.1rem;">
         <pre class="brush: js; highlight:[9]">
 		/**
-		 * ng-repeat (index.html)
+		 * query with ng-repeat(index.html)
 		 **/
 		<div class="row">
 			<div ng-controller="RestaurantListController">
@@ -786,31 +786,22 @@
         </pre>
         </span>
     </section>
-    <section>
-        <h3>Quering</h3>
-        <span style="font-size:  1.25rem;">
-        <pre class="brush: js; highlight:[9]">
-		/**
-		 * query (index.html)
-		 **/
-
-		 	***code block here***
-
-		/* end */
-		</pre>
-		</span>
-    </section>
 
     <section>
-        <h3>Filtering</h3>
+        <h3>Filter</h3>
         <span style="font-size:  1.25rem;">
-        <pre class="brush: js; highlight:[9]">
+        <pre class="brush: js; highlight:[6,9]">
 		/**
-		 * filter (index.html)
+		 * priceFormatter and ratingFormatter (index.html) are filters 
+		 * that are defined in formatters.js 
 		 **/
-
-		 	***code block here***
-
+         <div class="large-3 medium-6 small-12 columns">
+             <p>Price: {{restaurant.price | priceFormatter}}</p>
+         </div>
+         <div class="large-3 medium-6 small-12 columns">
+             <p>Rating: {{restaurant.rating | ratingFormatter}}</p>
+         </div>
+                
 		/* end */
 		</pre>
 		</span>
@@ -820,15 +811,34 @@
     <section>
         <h3>Exercise #2</h3>
         <ul>
-            <li>Add ng-repeat and {{ }} for Restaurant List</li>
-            <li>Add Query and Filter to search for Restaurant</li>
+            <li>Add filter for ordering Restaurant List</li>
+            <li>Add Query to search for Restaurant</li>
         </ul>
     </section>
     <section>
-        <h3>Add Restaurant List</h3>
+        <h3>Sort Restaurant List</h3>
+        <span style="font-size:  1.25rem;">
+        <pre class="brush: js; highlight:[4]">
+		/**
+		 * (index.html) order the restaurant list by name 
+		 **/
+         ng-repeat="restaurant in restaurants |filter:query:strict | orderBy:'name'"
+         
+		/* end */
     </section>
     <section>
         <h3>Enable Search for Restaurant</h3>
+        <span style="font-size:  1.25rem;">
+        <pre class="brush: js; highlight:[5]">
+		/**
+		 * (index.html) A text box to allow searching for a restaurant 
+		 **/
+		 <div class='restaurantList'>
+             <input type="text" ng-model="query" placeholder="Search for restaurant"/>
+             ... ommitted ....
+         </div>
+         
+		/* end */
     </section>
     <section>
         <h3>Test our results</h3>
@@ -840,12 +850,7 @@
         <p style="padding-top: 1em;">Link to solution source: </p>
         <blockquote>
             <ul>
-                <li><a href="https://github.com/NVISIA/AngularWorkshop/blob/ex2-solution/webapp/js/app.js" target="_blank">app.js</a>
-                </li>
                 <li><a href="https://github.com/NVISIA/AngularWorkshop/blob/ex2-solution/webapp/index.html" target="_blank">index.html</a>
-                </li>
-                <li><a href="https://github.com/NVISIA/AngularWorkshop/blob/ex2-solution/webapp/js/controllers.js" target="_blank">controllers.js</a>
-                </li>
             </ul>
         </blockquote>
 
@@ -886,7 +891,7 @@
             // It identifies the DOM element that this controller 'controls'
             // This can be done a couple different ways.
             // However, this way supports minification and tends to be the preferred method.
-            restaurantReservationControllers.controller('RestaurantListController', ['$scope', '$http',
+            restaurantReservationModule.controller('RestaurantListController', ['$scope', '$http',
                 function ($scope, $http) {
 
                 // Use the Angular http service to retrieve the Restaurants.
@@ -914,7 +919,7 @@
             /**
              *  Add REST support for Restaurant List. (controllers.js)
              **/
-            restaurantReservationControllers.controller('RestaurantListController', ['$scope', '$http',
+            restaurantReservationModule.controller('RestaurantListController', ['$scope', '$http',
                 function ($scope, $http) {
 
                     // Use the Angular http service to retrieve the Restaurants.
@@ -940,10 +945,6 @@
         <p style="padding-top: 1em;">Link to solution source: </p>
         <blockquote>
             <ul>
-                <li><a href="https://github.com/NVISIA/AngularWorkshop/blob/ex3-solution/webapp/js/app.js" target="_blank">app.js</a>
-                </li>
-                <li><a href="https://github.com/NVISIA/AngularWorkshop/blob/ex3-solution/webapp/index.html" target="_blank">index.html</a>
-                </li>
                 <li><a href="https://github.com/NVISIA/AngularWorkshop/blob/ex3-solution/webapp/js/controllers.js" target="_blank">controllers.js</a>
                 </li>
             </ul>
@@ -1040,7 +1041,7 @@
 
 <section>
     <section>
-        <h3>Exercise #5 - Validation</h3>
+        <h3>Validation</h3>
         <ol>
             <li>Required fields</li>
             <li>Patterns</li>
@@ -1048,19 +1049,125 @@
         </ol>
     </section>
     <section>
+        <h3>Required fields</h3>
+            <span style="font-size:  1.25rem;">
+            <pre class="brush: js; highlight:[6]">
+            /**
+             *  Add 'required' key word to make a field mandatory.
+             **/
+             <div class="large-6 columns">
+                 <label>Number of Guests</label>
+                 <input type="number" name="guests" placeholder="#" ng-model="reservation.guests" required/>
+             </div>
+
+            /*  end */
+            </pre>
+            </span>
+    </section>
+    <section>
+        <h3>Patterns</h3>
+            <span style="font-size:  1.25rem;">
+            <pre class="brush: js; highlight:[6]">
+            /**
+             *  Add ng-pattern to validate fields like a phone number.
+             **/
+             <div class="large-6 medium-6 columns">
+                 <label>Phone:</label>
+                 <input type="text" ng-pattern="/^1?-?(\d{3})?-?\d{3}-?\d{4}$/" name="phone" placeholder="###-###-####" ng-model="reservation.phone" required />
+             </div>
+
+            /*  end */
+            </pre>
+            </span>
+    </section>
+    <section>
+        <h3>Disabling</h3>
+            <span style="font-size:  1.25rem;">
+            <pre class="brush: js; highlight:[5]">
+            /**
+             *  use ng-disabled to disable things like buttons until form data is complete.
+             **/
+             <div class="small-12 medium-12 large-12 small-centered columns">
+                 <button class="small radius button" ng-click="makeReservation()" ng-disabled="reservationForm.$invalid">Make Reservation</button>
+                 <a href="#/restaurants" class="small radius secondary button">Cancel</a>
+             </div>
+                    
+            /*  end */
+            </pre>
+            </span>
+    </section>
+    <section>
+        <h3>Exercise #5 - Validation</h3>
+        <ol>
+            <li>Make some fields mandatory</li>
+            <li>Enforce a valid phone number format</li>
+            <li>Disabling the submit button</li>
+        </ol>
+    </section>
+    <section>
+        <h3>Required fields</h3>
+            <span style="font-size:  1.25rem;">
+            <pre class="brush: js; highlight:[7,11]">
+            /**
+             *  Make Number of Guests and Name fields mandatory. 
+             * (restaurant-reservation-form.js)
+             **/
+             <div class="large-6 columns">
+                 <label>Number of Guests</label>
+                 <input type="number" name="guests" placeholder="#" ng-model="reservation.guests" required/>
+             </div>
+             <div class="large-12 columns">
+                 <label>Name:</label>
+                 <input type="text" name="name" placeholder="Enter your full name"  ng-model="reservation.name" required/>
+             </div>
+      
+            /*  end */
+            </pre>
+            </span>
+    </section>
+    <section>
+        <h3>Patterns</h3>
+            <span style="font-size:  1.25rem;">
+            <pre class="brush: js; highlight:[6]">
+            /**
+             *  Add a patter to the phone number field. (restaurant-reservation-form.js)
+             **/
+             <div class="large-6 medium-6 columns">
+                 <label>Phone:</label>
+                 <input type="text" ng-pattern="/^1?-?(\d{3})?-?\d{3}-?\d{4}$/" name="phone" placeholder="###-###-####" ng-model="reservation.phone" required />
+             </div>
+
+            /*  end */
+            </pre>
+            </span>
+    </section>
+    <section>
+        <h3>Disabling</h3>
+            <span style="font-size:  1.25rem;">
+            <pre class="brush: js; highlight:[5]">
+            /**
+             *  Disable the submit button until the form data is complete. (restaurant-reservation-form.js)
+             **/
+             <div class="small-12 medium-12 large-12 small-centered columns">
+                 <button class="small radius button" ng-click="makeReservation()" ng-disabled="reservationForm.$invalid">Make Reservation</button>
+                 <a href="#/restaurants" class="small radius secondary button">Cancel</a>
+             </div>
+                    
+            /*  end */
+            </pre>
+            </span>
+    </section>
+    <section>
         <h3>Test our results</h3>
 
-        <p>Launch your node.js server and test the models. (run.sh or run.bat)</p>
+        <p>Launch your node.js server and test the changes. (run.sh or run.bat)</p>
 
-        <p>
-            View the restaurants with try_it.html
-        </p>
-        <a href="http://localhost:9000/try_it.html" target="_blank">http://localhost:9000/try_it.html</a>
+        <a href="http://localhost:9000/index.html" target="_blank">http://localhost:9000/index.html</a>
 
         <blockquote>
             <p>Link to solution source: </p>
-            <a href="https://github.com/NVISIA/AngularWorkshop/blob/ex5-solution/webapp/js/restaurant.js"
-               target="_blank">restaurant.js</a>
+            <a href="https://github.com/NVISIA/AngularWorkshop/blob/ex5-solution/webapp/index.html"
+               target="_blank">index.html</a>
         </blockquote>
     </section>
     <section>
@@ -1099,12 +1206,9 @@
     <section>
         <h3>Test our results</h3>
 
-        <p>Launch your node.js server and test the models. (run.sh or run.bat)</p>
+        <p>Launch your node.js server and test the changes. (run.sh or run.bat)</p>
 
-        <p>
-            View the restaurants with try_it.html
-        </p>
-        <a href="http://localhost:9000/try_it.html" target="_blank">http://localhost:9000/try_it.html</a>
+        <a href="http://localhost:9000/index.html" target="_blank">http://localhost:9000/index.html</a>
 
         <blockquote>
             <p>Link to solution source: </p>
@@ -1147,12 +1251,9 @@
     <section>
         <h3>Test our results</h3>
 
-        <p>Launch your node.js server and test the models. (run.sh or run.bat)</p>
+        <p>Launch your node.js server and test the changes. (run.sh or run.bat)</p>
 
-        <p>
-            View the restaurants with try_it.html
-        </p>
-        <a href="http://localhost:9000/try_it.html" target="_blank">http://localhost:9000/try_it.html</a>
+        <a href="http://localhost:9000/index.html" target="_blank">http://localhost:9000/index.html</a>
 
         <blockquote>
             <p>Link to solution source: </p>
@@ -1167,7 +1268,7 @@
         <h3>
             Questions?
         </h3>
-
+ 
         <p></p>
 
         <p>
