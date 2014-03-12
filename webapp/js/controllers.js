@@ -25,10 +25,14 @@
 "use strict";
 
 // Create bootstrap module based on ng-app name.
+// First argument matches the ng-app directive in index.html.
+var restaurantReservationModule = new angular.module('restaurantReservationControllers', []);
 
 
 // Add Controller to provide the Restaurant List.
-var restaurants = [
+// RestaurantListController is the ng-controller value in index.html. It identifies the DOM element that this controller 'controls'
+restaurantReservationModule.controller('RestaurantListController', function ($scope) {
+	$scope.restaurants = [
         {"name": "Shogun", "cuisine": "Sushi", "tagline": "", "description": "Japanese Teppanyaki Steakhouse & Sushi", "address": "518 College Ave", "rating": 81, "price": 4, "_id": "0M3K8g78cEfMyYE8"},
         {"name": "Carson's Ribs", "cuisine": "Barbecue", "tagline": "America's #1 BBQ", "description": "A Chicago institution since 1977, Carson's is the place visited by presidents, America's favorite athletes, stars of TV, the big screen, and literally millions of BBQ devotees. With hearty portions and a no holds barred attitude of offering only the finest quality available, Carson's promises to be a fabulous dining experience. For those seeking the best in an undeniably American dining tradition, Carson’s is a must!", "address": "1141 N Old World 3rd St", "rating": 85, "price": 3, "_id": "11XmtlX0V48coQSW"},
         {"name": "Zarletti", "cuisine": "Italian", "tagline": "Milwaukee's premier modern italian restaurant.", "description": "Zarletti serves traditional Italian classics in a casual contemporary atmosphere. Opening in 2004 we have been rated by Milwaukee critic Dennis Getto as \"some of the best Italian food being served in Milwaukee these days.\"", "address": "741 N Milwaukee St", "rating": 89, "price": 4, "_id": "1vD8MyaMHbJ8rJjH"},
@@ -41,6 +45,7 @@ var restaurants = [
         {"name": "Eddie Martini's", "cuisine": "Steakhouse", "tagline": "Our main goal: complete guest satisfaction.", "description": "Eddie Martini's is a 1940's style fine dining restaurant, featuring the freshest in steaks, chops and seafood. Our main goal: complete guest satisfaction.  We will accomplish this by offering service above and beyond our guests' expectations, preparing and serving food and beverages of high, consistent quality and creating an atmosphere that satisfies the wants and needs of our guests in ambiance and decor.", "address": "8612 W Watertown Plank Rd", "rating": 83, "price": 4, "_id": "xnbvJsxyX8NIsabi"}
     ];
 /// End of Restaurant List Controller. Needs to contain the restaurant array since we don't want it global.
+});
 
 // Create a Restaurant Detail Controller
 
