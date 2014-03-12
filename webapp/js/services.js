@@ -29,6 +29,12 @@ restaurantServices.factory('Restaurant', ['$http',
         return {
             GetAllRestaurants: function () {
                 return $http.get("/restaurants");
+            },
+            GetRestaurant: function (attrs) {
+                return $http.get("/restaurants/"+attrs.restaurantId);
+            },
+            GetReservations: function (attrs) {
+                return $http.get("/restaurants/"+attrs.restaurantId+"/reservations");
             }
         };
     }]);
