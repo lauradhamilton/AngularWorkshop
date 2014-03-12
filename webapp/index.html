@@ -22,7 +22,7 @@
   ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
   ~ THE SOFTWARE.
   -->
-<html class="no-js" lang="en" ng-app="restaurantReservationApp">
+<html class="no-js" lang="en" >
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -66,20 +66,34 @@
 </div>
 
 <div class="row">
+    <div >
+        <div id="restaurant-list-main" class="large-8 medium-8 columns">
+            <div class='restaurantList'>
 
-    <div ng-view class="large-8 medium-8 columns"></div>
-
-    <div class="large-4 medium-4 columns">
-        <!--
-                    <div class="panel">
-                        <label>Search Name:</label> <input ng-model="query.name">
-                        <label>Sort By:</label> <select class="dropdown" ng-model="orderProp">
-                            <option value="name">Alphabetical</option>
-                            <option value="price">Price</option>
-                            <option value="-rating">Rating</option>
-                        </select>
+                <div class="row" ng-repeat="restaurant in restaurants |filter:query:strict">
+                    <div class="large-12 columns">
+                        <div class="callout panel">
+                            <p><strong>{{restaurant.name}}</strong></p>
+                            <div class="row">
+                                <div class="large-3 medium-6 small-12 columns">
+                                    <p>Price: {{restaurant.price}}</p>
+                                </div>
+                                <div class="large-3 medium-6 small-12 columns">
+                                    <p>Rating: {{restaurant.rating}}</p>
+                                </div>
+                                <div class="large-6 medium-12 small-12 columns">
+                                    <p>Address: {{restaurant.address}}</p>
+                                </div>
+                            </div>
+                            <p>Description: {{restaurant.description}} </p>
+                        </div>
                     </div>
-        -->
+                </div>
+             </div>
+
+        </div>
+    </div>
+    <div class="large-4 medium-4 columns">
         <div class="panel">
             <h5>Other/Login?:</h5>
 
