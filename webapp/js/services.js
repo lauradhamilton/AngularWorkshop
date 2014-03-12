@@ -22,6 +22,17 @@
  *  THE SOFTWARE.
  */
 
+var restaurantServices = angular.module('restaurantServices', []);
+
+restaurantServices.factory('Restaurant', ['$http',
+    function ($http) {
+        return {
+            GetAllRestaurants: function () {
+                return $http.get("/restaurants");
+            }
+        };
+    }]);
+
 //var restaurantServices = angular.module('restaurantServices', ['ngResource']);
 //
 //restaurantServices.factory('Restaurant', ['$resource',
