@@ -4,3 +4,4 @@ server/reservations.db
 .idea/
 *.iml
 webapp/coverage/
+/.project
