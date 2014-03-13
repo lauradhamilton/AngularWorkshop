@@ -63,6 +63,14 @@ restaurantReservationModule.controller('RestaurantDetailController', ['$scope', 
             $scope.selectedTime = selectedTime;
         };
 
+    }]);
+
+
+// Create a Reservation Form Controller
+restaurantReservationModule.controller('ReservationFormController', ['$scope', '$http', '$routeParams', '$location',
+    function ($scope, $http, $routeParams, $location) {
+        $scope.reservation;
+
         $scope.makeReservation = function () {
             if ($scope.reservation) {
                 $scope.reservation.restaurantId = $scope.restaurant.id;
@@ -75,11 +83,7 @@ restaurantReservationModule.controller('RestaurantDetailController', ['$scope', 
             })
         };
 
-
     }]);
-
-
-// Create a Reservation Form Controller
 
 
 // Create a Reservation Detail Controller
