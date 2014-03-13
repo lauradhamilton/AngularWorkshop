@@ -53,7 +53,7 @@ restaurantReservationModule.controller('RestaurantDetailController', function ($
 });
 
 // Create a Reservation Form Controller
-restaurantReservationModule.controller('ReservationFormController', function ($scope, $location, Restaurant) {
+restaurantReservationModule.controller('ReservationFormController',['$scope','$location','Reservation', function ($scope, $location, Reservation) {
         $scope.makeReservation = function () {
             if ($scope.reservationForm.$valid) {
                 if ($scope.reservation) {
@@ -69,7 +69,7 @@ restaurantReservationModule.controller('ReservationFormController', function ($s
             }
         };
 
-    });
+    }]);
 
 //Create a Reservation Detail Controller
 restaurantReservationModule.controller('ReservationDetailController', function ($scope, $routeParams, Reservation, Restaurant) {
