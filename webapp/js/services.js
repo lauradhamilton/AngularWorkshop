@@ -22,7 +22,7 @@
  *  THE SOFTWARE.
  */
 
-/*
+
 "use strict";
 var restaurantServices = angular.module('restaurantServices', ['ngResource']);
 
@@ -40,4 +40,3 @@ restaurantServices.factory('Reservation', ['$resource',
         return $resource('/reservations/:reservationId', {reservationId: '@reservationId'});
     }
 ]);
-*/
