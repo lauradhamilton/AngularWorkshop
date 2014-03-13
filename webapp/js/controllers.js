@@ -24,7 +24,8 @@
 
 "use strict";
 
-// Create bootstrap module based on ng-app name.
+// Create controller module based on ng-controller name in index.html (RestaurantListController).
+
 
 
 // Add Controller to provide the Restaurant List.
