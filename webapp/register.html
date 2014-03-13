@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<!--
+  ~ The MIT License (MIT)
+  ~
+  ~ Copyright (c) 2014 © NVISIA, LLC.
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in
+  ~ all copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+  ~ THE SOFTWARE.
+  -->
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Backbone SPA Workshop - Restaurant Reservation System</title>
+
+    <link rel="stylesheet" href="css/base.css"/>
+
+    <script type="text/javascript" src="libs/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="libs/underscore.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var route = $(location).attr('hash');
+            $('.register').click(function() {
+                $.ajax({
+                    type: 'POST',
+                    url: 'register',
+                    data: {
+                        user: $('input[name="user"]').val(),
+                        password: $('input[name="password"]').val(),
+                        email: $('input[name="email"]').val()
+                    },
+                    success: function(response) {
+                        if (response.success === true) {
+                            window.location.href = "/" + route;
+                        } else {
+                            $('.errors ul').empty();
+                            _.each(response.errors, function(error) {
+                                $('.errors ul').append('<li>' + error + '</li>');
+                            });
+                            $('.errors').show();
+                        }
+                    }
+                });
+
+                return false;
+            });
+        });
+    </script>
+</head>
+
+<body class="restaurant">
+
+    <div class="row">
+        <div class="large-12 columns">
+            <div style="display: inline-block;">
+                <img src="img/icon_01.png" width="90px;"/>
+            </div>
+            <div style="display: inline-block;">
+                <h1 class="title-main">Easy Reservations</h1>
+
+                <p class="title-sub">Simply choose a restaurant, a time, and submit your reservation!</p>
+            </div>
+            <div class="panel" style="text-align">
+                <div class="errors" style="background-color: yellow;border: 2px solid red;font-size:1.2em;display: none;margin-bottom: 20px;">
+                    <ul style="margin: 4px;list-style:none;"></ul>
+                </div>
+                <form method="POST">
+                    <div class="row">
+                        <div class="large-6 columns">
+                            <label>User</label>
+                            <input type="text" name="user"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-6 columns">
+                            <label>Password</label>
+                            <input type="password" name="password" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-6 columns">
+                            <label>Email</label>
+                            <input type="text" name="email" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-6 columns">
+                            <button class="small radius button register">Register</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="css/foundation.css"/>
+    <script type="text/javascript" src="libs/modernizr.js"></script>
+    <script type="text/javascript" src="libs/foundation.min.js"></script>
+    <script>
+        $(document).ready( function() {
+            $(document).foundation();
+        });
+    </script>
+
+</body>
+</html>
