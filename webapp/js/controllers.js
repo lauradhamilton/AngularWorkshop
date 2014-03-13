@@ -56,7 +56,7 @@ restaurantReservationModule.controller('RestaurantDetailController', function ($
 });
 
 // Create a Reservation Form Controller
-restaurantReservationModule.controller('ReservationFormController', function ($scope, $location, Restaurant, Reservation) {
+restaurantReservationModule.controller('ReservationFormController', function ($scope, $location, Restaurant) {
         $scope.makeReservation = function () {
             if ($scope.reservationForm.$valid) {
                 if ($scope.reservation) {
