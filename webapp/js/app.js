@@ -27,8 +27,7 @@
 var restaurantReservationApp = angular.module('restaurantReservationApp', [
    'restaurantReservationControllers',
    'formatters',
-   'ngRoute',
-    'restaurantServices'
+   'ngRoute'
 ]);
 
 restaurantReservationApp.config(['$routeProvider',

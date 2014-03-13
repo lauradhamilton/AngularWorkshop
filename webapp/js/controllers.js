@@ -25,7 +25,7 @@
 "use strict";
 
 // Create controller module based on ng-controller name in index.html (RestaurantListController).
-var restaurantReservationModule = new angular.module('restaurantReservationControllers', []);
+var restaurantReservationModule = new angular.module('restaurantReservationControllers', ['restaurantServices']);
 
 
 // Add Controller to provide the Restaurant List.
