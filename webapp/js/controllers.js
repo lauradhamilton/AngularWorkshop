@@ -32,21 +32,18 @@ var restaurantReservationModule = new angular.module('restaurantReservationContr
 // Add Controller to provide the Restaurant List.
 // RestaurantListController is the ng-controller value in index.html. It identifies the DOM element that this controller 'controls'
 restaurantReservationModule.controller('RestaurantListController', function ($scope, Restaurant) {
-    Restaurant.GetAllRestaurants().success(function (restaurants) {
-	    $scope.restaurants = restaurants;
-        $scope.orderProp = 'name'; // Defaults the order property to the Name value.
-    });
+    $scope.restaurants = Restaurant.GetAllRestaurants();
+    $scope.orderProp = 'name'; // Defaults the order property to the Name value.
 	 
 /// End of Restaurant List Controller. Needs to contain the restaurant array since we don't want it global.
 });
 
 // Create a Restaurant Detail Controller
 restaurantReservationModule.controller('RestaurantDetailController', function ($scope, $routeParams, Restaurant) {
-    Restaurant.GetRestaurant({restaurantId: $routeParams.id}).success(function (restaurant) {
-        $scope.restaurant = restaurant;
-    });
+	$scope.restaurant = Restaurant.GetRestaurant({restaurantId: $routeParams.id});
  
-    Restaurant.GetReservations({restaurantId: $routeParams.id}).success(function (data) {
+    Restaurant.GetReservations({restaurantId: $routeParams.id},
+    function (data) {
         $scope.available = data.available;
     });
     
@@ -74,21 +71,10 @@ restaurantReservationModule.controller('ReservationFormController', function ($s
 
     });
 
-// Create a Reservation Detail Controller
+//Create a Reservation Detail Controller
 restaurantReservationModule.controller('ReservationDetailController', function ($scope, $routeParams, Reservation, Restaurant) {
-    $scope.makeReservation = function () {
-        if ($scope.reservationForm.$valid) {
-            if ($scope.reservation) {
-                $scope.reservation.restaurantId = $scope.restaurant.id;
-                $scope.reservation.time = $scope.selectedTime;
-            }
-            var newReservation = new Reservation($scope.reservation);
-
-            // Use built-in save function (using a POST) (Non-GET are prefixed with a '$')
-            newReservation.$save(function (reservation) {
-                $location.path("/reservation/" + reservation.id);
-            });
-        }
-    };
-
+        $scope.reservation = Reservation.get({reservationId: $routeParams.id}, function (reservation) {
+            $scope.restaurant = Restaurant.GetRestaurant({restaurantId: reservation.restaurantId});
+        });
+/// End of Reservation Detail Controller.
 });
