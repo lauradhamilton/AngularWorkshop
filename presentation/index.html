@@ -1010,33 +1010,74 @@
             <span style="font-size:  1.25rem;">
             <pre class="brush: js; ">
             /**
-             *  
+             *  A "partial" bit of html that displays the retaurant list
              **/
-
-            </pre>
-            </span>
-
-    </section>
-    <section>
-        <h3>Partials to Controller connection</h3>
-            <span style="font-size:  1.25rem;">
-            <pre class="brush: js; ">
-            /**
-             *  
-             **/
-
+			<div class='restaurantList'>
+			    <input type="text" ng-model="query" placeholder="Search for restaurant"/>
+			    <div class="row" ng-repeat="restaurant in restaurants | filter:query:strict | orderBy:orderProp">
+			        <div class="large-12 columns">
+			            <div class="callout panel">
+			                <div ng-include src="'partials/restaurant.html'"/>
+			                <a class="button" style="color: white;" href="#/restaurant/{{restaurant.id}}">Show Times</a>
+			            </div>
+			        </div>
+			    </div>
+			</div>
+			
+			/* end */
             </pre>
             </span>
 
     </section>
     <section>
         <h3>Router</h3>
+            <span style="font-size:  1.25rem; ">
+            <pre class="brush: js; highlight:[4]">
+            /**
+             * Defines and injects the routeProvider into the config function of our application
+             **/
+            restaurantReservationApp.config(['$routeProvider',
+                function ($routeProvider) {
+                    $routeProvider
+                        .when('/restaurants', {
+                            templateUrl: 'partials/restaurant-list.html',
+                            controller: 'RestaurantListController'
+                        })
+                        ... ommitted ...
+                }]);            
+
+                /* end */
+            </pre>
+            </span>
+
+            <span style="font-size:  1.25rem;">
+            <pre class="brush: js; highlight:[8]">
+            /**
+             *  Routers require ngRoute
+             **/
+             
+            var restaurantReservationApp = angular.module('restaurantReservationApp', [
+               'restaurantReservationControllers',
+               'formatters',
+               'ngRoute'
+            ]);
+            
+            /* end */
+            </pre>
+            </span>
+
+    </section>
+    <section>
+        <h3>ngView</h3>
             <span style="font-size:  1.25rem;">
             <pre class="brush: js; ">
             /**
-             *  
+             *  ngView is a directive that renders the template of the current route
              **/
-
+             
+            <div ng-view class="large-8 medium-8 columns"></div>
+            
+            /* end */
             </pre>
             </span>
 
@@ -1051,9 +1092,9 @@
         </ul>
     </section>
     <section>
-        <h3>Add the Router</h3>
+        <h3>Add the Route Dependency</h3>
             <span style="font-size:  1.25rem;">
-            <pre class="brush: js; highlight:[7]">
+            <pre class="brush: js; highlight:[8]">
             /**
              *  Inject the ngRoute parameter into the restaurantReservationApp module (app.js)
              **/
@@ -1070,6 +1111,9 @@
 
     </section>
     <section>
+        <aside class="notes">
+            Discuss the configuration of the routes to the template 
+        </aside>
         <h3>Add the Router</h3>
             <span style="font-size:  1.25rem;">
             <pre class="brush: js; ">
