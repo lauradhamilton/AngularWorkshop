@@ -42,6 +42,8 @@
 
 <!--Intro-->
 <section>
+    <h2>Welcome</h2>
+
     <div style="text-align: left; margin-top: 1em;">
         <h5>Your Instructor: Courtney Faulkner</h5>
         <p>
@@ -49,8 +51,6 @@
             and training the client to maintain and extend the application.
         </p>
     </div>
-
-    <h2>Welcome</h2>
 
     <div style="text-align: left; margin-top: 1em;">
         <h5>Your Host: NVISIA</h5>
@@ -457,7 +457,7 @@
 <section>
     <!-- Getting Started -->
     <section>
-	    <aside class="notes">
+        <aside class="notes">
             <strong>Clearly explain approach for exercises.</strong>
             <ol>
                 <li>walk through code</li>
@@ -466,7 +466,7 @@
                 <li>assist getting it to work.</li>
                 <li>provide a reset point</li>
             </ol>
-	    </aside>
+        </aside>
         <h3>Getting Started</h3>
         <ul>
             <li>Bootstrapping AngularJS</li>
@@ -500,7 +500,7 @@
          */
 
         var restaurantReservationApp =
-			new angular.module('restaurantReservationApp', []);
+            new angular.module('restaurantReservationApp', []);
 
         /* End */
         </pre>
@@ -522,12 +522,12 @@
 
          var restaurantReservationControllers = new angular.module('restaurantReservationControllers', []);
 
-		 restaurantReservationControllers.controller('RestaurantListController', function ($scope) {
-			$scope.restaurants = [
-				{some restaurant information here},
-				{more restaurant information}
-				...
-			];
+         restaurantReservationControllers.controller('RestaurantListController', function ($scope) {
+            $scope.restaurants = [
+                {some restaurant information here},
+                {more restaurant information}
+                ...
+            ];
 
         /* End */
         </pre>
@@ -546,12 +546,12 @@
          * A List of Restaurants    (index.html)
          */
 
-		<div class="row">
-			<div ng-controller="RestaurantListController">
-				<div id="restaurant-list-main" class="large-8 medium-8 columns">
-					<div class='restaurantList'>
-					...
-		            </div>
+        <div class="row">
+            <div ng-controller="RestaurantListController">
+                <div id="restaurant-list-main" class="large-8 medium-8 columns">
+                    <div class='restaurantList'>
+                    ...
+                    </div>
                 </div>
             </div>
         </div>
@@ -713,12 +713,12 @@
             Enter name: <input type="text" ng-model="name"><br>
             Hello <span ng-bind="name"></span>!
         </aside>
-        <h3>ng-bind</h3>
+        <h3>Binding</h3>
         <span style="font-size:  1.25rem;">
         <pre class="brush: js; highlight:[7,10,13]">
-		/**
-		 * ng-bind and curly braces binding (index.html)
-		 **/
+        /**
+         * ng-bind and curly braces binding (index.html)
+         **/
             ...
         <div class="row">
             <div class="large-3 medium-6 small-12 columns">
@@ -732,36 +732,23 @@
             </div>
         </div>
             ...
-		/* end */
-		</pre>
-		</span>
+        /* end */
+        </pre>
+        </span>
     </section>
     <section>
         <h3>ng-repeat</h3>
         <span style="font-size:  1.1rem;">
         <pre class="brush: js; highlight:[9]">
-		/**
-		 * query with ng-repeat(index.html)
-		 **/
-		<div class="row">
-			<div ng-controller="RestaurantListController">
-				<div id="restaurant-list-main" class="large-8 medium-8 columns">
-					<div class='restaurantList'>
-						<input type="text" ng-model="query" placeholder="Search for restaurant"/>
-						<div class="row" ng-repeat="restaurant in restaurants |filter:query:strict">
-							<div class="large-12 columns">
-
-							...
-
-		                    </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-		/* end */
-		</pre>
-		</span>
+        /**
+         * restaurant row reapeater (index.html)
+         **/
+         
+        <div class="row" ng-repeat="restaurant in restaurants"/>
+        
+        /* end */
+        </pre>
+        </span>
     </section>
 
     <section>
@@ -788,57 +775,91 @@
     </section>
 
     <section>
+       <aside class="notes">
+            input search box is added in the next section, tied together with query
+        </aside>
         <h3>Filter</h3>
         <span style="font-size:  1.25rem;">
+        <pre class="brush: js; ">
+        /**
+         * filter 
+         **/
+
+        <div class="row" ng-repeat="restaurant in restaurants | filter:query:strict">
+                
+        /* end */
+        </pre>
+        </span>
+    </section>
+    <section>
+        <h3>Formatter Filter</h3>
+        <span style="font-size:  1.25rem;">
         <pre class="brush: js; highlight:[6,9]">
-		/**
-		 * priceFormatter and ratingFormatter (index.html) are filters 
-		 * that are defined in formatters.js 
-		 **/
+        /**
+         * priceFormatter (index.html) 
+         **/
+         
          <div class="large-3 medium-6 small-12 columns">
              <p>Price: {{restaurant.price | priceFormatter}}</p>
          </div>
-         <div class="large-3 medium-6 small-12 columns">
-             <p>Rating: {{restaurant.rating | ratingFormatter}}</p>
-         </div>
+         
+        /* end */
+        </pre>
+        </span>
+
+        <span style="font-size:  1.25rem;">
+        <pre class="brush: js; highlight:[6,9]">
+        /**
+         * priceFormatter (formatters.js)
+         **/
+         
+        filter('priceFormatter',function () {
+            return function (price, emptyStrText) {
+                var index, out = "";
+                for (index = 1; index <= price; index++) {
+                    out += "$";
+                }
+                return out;
+            }
+        }).
                 
-		/* end */
-		</pre>
-		</span>
+        /* end */
+        </pre>
+        </span>
     </section>
 </section>
 <section>
     <section>
         <h3>Exercise #2</h3>
         <ul>
-            <li>Add filter for ordering Restaurant List</li>
-            <li>Add Query to search for Restaurant</li>
+            <li>Add filter and order Restaurant List</li>
+            <li>Add Query to search for Restaurant by name</li>
         </ul>
     </section>
     <section>
         <h3>Sort Restaurant List</h3>
         <span style="font-size:  1.25rem;">
         <pre class="brush: js; highlight:[4]">
-		/**
-		 * (index.html) order the restaurant list by name 
-		 **/
+        /**
+         * (index.html) order the restaurant list by name 
+         **/
          ng-repeat="restaurant in restaurants |filter:query:strict | orderBy:'name'"
          
-		/* end */
+        /* end */
     </section>
     <section>
         <h3>Enable Search for Restaurant</h3>
         <span style="font-size:  1.25rem;">
         <pre class="brush: js; highlight:[5]">
-		/**
-		 * (index.html) A text box to allow searching for a restaurant 
-		 **/
-		 <div class='restaurantList'>
+        /**
+         * (index.html) A text box to allow searching for a restaurant 
+         **/
+         <div class='restaurantList'>
              <input type="text" ng-model="query" placeholder="Search for restaurant"/>
              ... ommitted ....
          </div>
          
-		/* end */
+        /* end */
     </section>
     <section>
         <h3>Test our results</h3>
@@ -905,8 +926,8 @@
 </section>
 <section>
     <section>
-	    <aside>
-	    </aside>
+        <aside>
+        </aside>
         <h3>Exercise #3</h3>
         <ul>
             <li>Replace static restaurant list with $http</li>
@@ -977,7 +998,7 @@
 </section>
 <section>
     <section>
-        <h3>Partials and Router</h3>
+        <h3>MVC</h3>
         <ol>
             <li>HTML Partial as a template</li>
             <li>Using a Router</li>
@@ -1032,11 +1053,51 @@
     <section>
         <h3>Add the Router</h3>
             <span style="font-size:  1.25rem;">
+            <pre class="brush: js; highlight:[7]">
+            /**
+             *  Inject the ngRoute parameter into the restaurantReservationApp module (app.js)
+             **/
+             
+            var restaurantReservationApp = angular.module('restaurantReservationApp', [
+               'restaurantReservationControllers',
+               'formatters',
+               'ngRoute'
+            ]);
+            
+            /* end */
+            </pre>
+            </span>
+
+    </section>
+    <section>
+        <h3>Add the Router</h3>
+            <span style="font-size:  1.25rem;">
             <pre class="brush: js; ">
             /**
-             *  
+             *  Uncomment the router already defined (app.js) 
              **/
+             
+            restaurantReservationApp.config(['$routeProvider',
+                function ($routeProvider) {
+                    $routeProvider
+                        .when('/restaurants', {
+                            templateUrl: 'partials/restaurant-list.html',
+                            controller: 'RestaurantListController'
+                        })
+                        .when('/restaurant/:id', {
+                            templateUrl:'partials/restaurant-detail.html',
+                            controller:'RestaurantDetailController'
+                        })
+                        .when('/reservation/:id', {
+                            templateUrl:'partials/reservation-detail.html',
+                            controller:'ReservationDetailController'
+                        })
+                        .otherwise({
+                            redirectTo: '/restaurants'
+                        });
+                }]);            
 
+            /* end */
             </pre>
             </span>
 
@@ -1044,11 +1105,25 @@
     <section>
         <h3>Connect Partials to the Controller</h3>
             <span style="font-size:  1.25rem;">
-            <pre class="brush: js; ">
+            <pre class="brush: js; highlight:[7,12]">
             /**
-             *  
+             *  Remove the entire RestaurantListController div and replace
+             *  with the ng-view div defined below.  (index.html)
              **/
+             
+             Remove ...
+            <div ng-controller="RestaurantListController">
+                ... ommitted ...
+            </div>
+            
+            ... and replace with ...
+            <div ng-view class="large-8 medium-8 columns"></div>
 
+            /**
+            ** ng-view renders the template of the current route as defined in the router
+            **/
+            
+            /* end */            
             </pre>
             </span>
 
@@ -1066,8 +1141,6 @@
                 <li><a href="https://github.com/NVISIA/AngularWorkshop/blob/ex4-solution/webapp/js/app.js" target="_blank">app.js</a>
                 </li>
                 <li><a href="https://github.com/NVISIA/AngularWorkshop/blob/ex4-solution/webapp/index.html" target="_blank">index.html</a>
-                </li>
-                <li><a href="https://github.com/NVISIA/AngularWorkshop/blob/ex4-solution/webapp/js/controllers.js" target="_blank">controllers.js</a>
                 </li>
             </ul>
         </blockquote>
@@ -1168,10 +1241,9 @@
     <section>
         <h3>Required fields</h3>
             <span style="font-size:  1.25rem;">
-            <pre class="brush: js; highlight:[7,11]">
+            <pre class="brush: js; highlight:[6,10]" >
             /**
-             *  Make Number of Guests and Name fields mandatory. 
-             * (restaurant-reservation-form.js)
+             *  Make Number of Guests and Name fields mandatory (restaurant-reservation-form.js)
              **/
              <div class="large-6 columns">
                  <label>Number of Guests</label>
@@ -1182,6 +1254,24 @@
                  <input type="text" name="name" placeholder="Enter your full name"  ng-model="reservation.name" required/>
              </div>
       
+            /*  end */
+            </pre>
+            </span>
+            
+            <span style="font-size:  1.25rem;">
+            <pre class="brush: js; highlight:[6,10]" >
+            /**
+             *  Note the styling (base.css) 
+             **/
+             
+            .css-form input.ng-invalid.ng-dirty {
+                background-color: #FA787E;
+            }
+            
+            .css-form input.ng-valid.ng-dirty {
+                background-color: #78FA89;
+            }
+                  
             /*  end */
             </pre>
             </span>
@@ -1227,8 +1317,8 @@
 
         <blockquote>
             <p>Link to solution source: </p>
-            <a href="https://github.com/NVISIA/AngularWorkshop/blob/ex5-solution/webapp/index.html"
-               target="_blank">index.html</a>
+            <a href="https://github.com/NVISIA/AngularWorkshop/blob/ex5-solution/webapp/partials/restaurant-reservation-form.html"
+               target="_blank">restaurant-reservation-form.html</a>
         </blockquote>
     </section>
     <section>
@@ -1258,9 +1348,9 @@
 
 <section>
     <section>
-        <h3>Using $resource</h3>
+        <h3>Using Resources</h3>
         <ol>
-            <li>Convert Services from $http to $resource</li>
+            <li>Convert Services from $http to resource</li>
             <li>Define Resource methods</li>
         </ol>
     </section>
@@ -1269,9 +1359,54 @@
     <section>
         <h3>Exercise #6 - $http to $resource</h3>
         <ol>
+            <li>Inject RestaurantServices into RestaurantReservationModule</li>
             <li>Convert Services</li>
             <li>Define Resource methods</li>
         </ol>
+    </section>
+    <section>
+        <h3>Inject RestaurantServices</h3>
+            <span style="font-size:  1.25rem;">
+            <pre class="brush: js; highlight:[6]">
+            /**
+             *  Add the restaurantServices to the restaurantReservationModule (controllers.js)
+             **/
+             
+             var restaurantReservationModule = 
+                new angular.module('restaurantReservationControllers', ['restaurantServices']);
+                    
+            /*  end */
+            </pre>
+            </span>
+    </section>
+    <section>
+        <h3>Convert Services to use resource</h3>
+
+            Change the RestaurantListController to use a resource rather than $http (controllers.js)
+             
+            <span style="font-size:  1.25rem;">
+            <pre class="brush: js; ">
+            restaurantReservationModule.controller('RestaurantListController', ['$scope', '$http',
+                 function ($scope, $http) {
+             
+                     // Use the Angular http service to retrieve the Restaurants.
+                     $http.get('/restaurants').success(function (data) {
+                         $scope.restaurants = data;
+                     });
+            </pre>
+            </span>
+
+            <span style="font-size:  1.25rem;">
+            <pre class="brush: js; ">
+            restaurantReservationModule.controller('RestaurantListController', ['$scope', 'Restaurant',
+                function ($scope, Restaurant) {
+                    $scope.restaurants = Restaurant.GetAllRestaurants();
+            
+                    $scope.orderProp = 'name'; // Defaults the order property to the Name value.
+            
+                }]);
+            </pre>
+            </span>
     </section>
     <section>
         <h3>Test our results</h3>
@@ -1282,8 +1417,8 @@
 
         <blockquote>
             <p>Link to solution source: </p>
-            <a href="https://github.com/NVISIA/AngularWorkshop/blob/ex6-solution/webapp/js/restaurant.js"
-               target="_blank">restaurant.js</a>
+            <a href="https://github.com/NVISIA/AngularWorkshop/blob/ex6-solution/webapp/js/controllers.js"
+               target="_blank">controllers.js</a>
         </blockquote>
     </section>
     <section>
