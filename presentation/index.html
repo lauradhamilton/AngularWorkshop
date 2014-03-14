@@ -1643,9 +1643,75 @@
     <section>
         <h3>Custom Directives</h3>
         <ol>
-            <li>Convert Restaurant to a Directive</li>
+            <li>Defining a Custom Directive</li>
+            <li>Using a Custom Directive</li>
             <li>ng-transclude</li>
         </ol>
+    </section>
+    <section>
+        <h3>Defining a Custom Directive</h3>
+        
+        Directives are markers that allow you to attach behavior to DOM elements
+        
+        <span style="font-size:  1.25rem;">
+        <pre class="brush: js;">
+        /*
+         * nvisiaRestaurant custom directive that attaches the restaurant partial to an 
+         * Attribute or Element
+         */
+		angular.module('customDirectives', [])
+		    .directive('nvisiaRestaurant', function() {
+		        return {
+		            restrict: 'AE',
+		            scope: {
+		                restaurant: '='
+		            },
+		            templateUrl: 'partials/restaurant.html'
+		        };
+		    })
+
+            /* end */
+        </pre>
+        </span>
+    </section>
+    <section>
+        <h3>Using a Custom Directive</h3>
+            <span style="font-size:  1.25rem;">
+            <pre class="brush: js; highlight:[9]">
+            /*
+             * specifing the nvisia-restaurant custom directive
+             */
+             
+            <nvisia-restaurant restaurant="restaurant"></nvisia-restaurant>
+            
+            /* end */
+            </pre>
+            </span>
+
+    </section>
+    <section>
+        <h3>ng-transclude</h3>
+        ngTransclude is a directive that indicates if content of an element will be replaced
+            <span style="font-size:  1.25rem;">
+            <pre class="brush: js; highlight:[8,12]">
+            /*
+             * defining the nvisiaButton custom directive using 
+             */
+             
+		    .directive('nvisiaButton', function() {
+		        return {
+		            restrict: 'E',
+		            transclude: true,
+		            scope: {
+		                href: '@href'
+		            },
+		            template: '<a class="button" style="color: white;" ng-attr-href="{{href}}" ng-transclude></a>'
+		        };
+            
+            /* end */
+            </pre>
+            </span>
+            
     </section>
 </section>
 <section>
@@ -1653,8 +1719,94 @@
         <h3>Exercise #7 - Custom Directives</h3>
         <ol>
             <li>Convert Restaurant to a Directive</li>
-            <li>Use ng-transclude for a button</li>
+            <li>Convert a button to a Directive</li>
+            <li>Using ng-transclude on a button</li>
         </ol>
+    </section>
+    <section>
+        <h3>Add the Directives dependency</h3>
+            <span style="font-size:  1.25rem;">
+            <pre class="brush: js; highlight:[9]">
+            /*
+             * add customDirectives to the restaurantReservationApp (app.js)
+             * customDirectives are defined in directives.js
+             */
+			var restaurantReservationApp = angular.module('restaurantReservationApp', [
+			   'restaurantReservationControllers',
+			   'formatters',
+			   'ngRoute',
+			   'customDirectives'
+			]);
+            </pre>
+            </span>
+
+    </section>
+    <section>
+        <h3>Convert Restaurant to a directive</h3>
+            <span style="font-size:  1.25rem;">
+            <pre class="brush: js; highlight:[9]">
+            /*
+             * replace the restaurant list partials include with a custom directive (restaurant-list.html)
+             */
+			<div class='restaurantList'>
+			    <input type="text" ng-model="query" placeholder="Search for restaurant"/>
+			    <div class="row" ng-repeat="restaurant in restaurants | filter:query:strict | orderBy:orderProp">
+			        <div class="large-12 columns">
+			            <div class="callout panel">
+			                <nvisia-restaurant restaurant="restaurant"></nvisia-restaurant>
+			                <nvisia-button href="#/restaurant/{{restaurant.id}}">Show Times</nvisia-button>
+			            </div>
+			        </div>
+			    </div>
+			</div>
+			
+			/* end */
+            </pre>
+            </span>
+    </section>
+    <section>
+        <h3>Convert Button to a directive</h3>
+            <span style="font-size:  1.25rem;">
+            <pre class="brush: js; highlight:[10]">
+            /*
+             * replace the show times button with a custom directive (restaurant-list.html)
+             */
+            <div class='restaurantList'>
+                <input type="text" ng-model="query" placeholder="Search for restaurant"/>
+                <div class="row" ng-repeat="restaurant in restaurants | filter:query:strict | orderBy:orderProp">
+                    <div class="large-12 columns">
+                        <div class="callout panel">
+                            <nvisia-restaurant restaurant="restaurant"></nvisia-restaurant>
+                            <nvisia-button href="#/restaurant/{{restaurant.id}}">Show Times</nvisia-button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            /* end */
+            </pre>
+            </span>
+    </section>
+    <section>
+        <h3>Using ng-transclude on a button</h3>
+            <span style="font-size:  1.25rem;">
+            <pre class="brush: js; highlight:[7,11]">
+            /*
+             * set transclude to true and include the ng-transclude in html (directives.js)
+             */
+		    .directive('nvisiaButton', function() {
+		        return {
+		            restrict: 'E',
+		            transclude: true,
+		            scope: {
+		                href: '@href'
+		            },
+		            template: '<a class="button" style="color: white;" ng-attr-href="{{href}}" ng-transclude></a>'
+		        };
+		    });            
+            /* end */
+            </pre>
+            </span>
     </section>
     <section>
         <h3>Test our results</h3>
@@ -1663,10 +1815,16 @@
 
         <a href="http://localhost:9000/index.html" target="_blank">http://localhost:9000/index.html</a>
 
+        <p style="padding-top: 1em;">Link to solution source: </p>
         <blockquote>
-            <p>Link to solution source: </p>
-            <a href="https://github.com/NVISIA/AngularWorkshop/blob/ex7-solution/webapp/js/restaurant.js"
-               target="_blank">restaurant.js</a>
+            <ul>
+                <li><a href="https://github.com/NVISIA/AngularWorkshop/blob/ex7-solution/webapp/js/app.js" target="_blank">app.js</a>
+                </li>
+                <li><a href="https://github.com/NVISIA/AngularWorkshop/blob/ex7-solution/webapp/js/directives.js" target="_blank">directives.js</a>
+                </li>
+                <li><a href="https://github.com/NVISIA/AngularWorkshop/blob/ex7-solution/webapp/partials/restaurant-list.html" target="_blank">restaurant-list.html</a>
+                </li>
+            </ul>
         </blockquote>
     </section>
     <section>
