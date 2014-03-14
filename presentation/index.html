@@ -1394,26 +1394,101 @@
     <section>
         <h3>Using Resources</h3>
         <ol>
-            <li>Convert Services from $http to resource</li>
-            <li>Define Resource methods</li>
+            <li>Creating $resource services</li>
+            <li>Defining $resource service methods</li>
         </ol>
+    </section>
+    <section>
+        <h3>$resource</h3>
+            <span style="font-size:  1.25rem;">
+            </span>
+
+            $resource is a factory that enables you to call RESTful server-side APIs
+    </section>
+    <section>
+        <h3>$resource services</h3>
+            <span style="font-size:  1.25rem;">
+            <pre class="brush: js; highlight:[7]">
+            /**
+             *  
+             *  $resource factory removes the need to interact with $http directly
+             **/
+             restaurantServices.factory('Restaurant', ['$resource',
+                function ($resource) {
+                    return $resource('/restaurants/:restaurantId/:reservations', {restaurantId: '@restaurantId'}, {
+                        GetRestaurant: {method: 'GET', params: {restaurantId: 'restaurantId'}, cache: true},
+                        GetAllRestaurants: {method: 'GET', params: {}, isArray: true},
+                        GetReservations: {method: 'GET', params: {restaurantId: 'restaurantId', reservations: 'reservations'}}
+                    });
+                }]);
+
+            /*  end */
+            </pre>
+            </span>
+    </section>
+    <section>
+        <h3>$resource service methods</h3>
+            <span style="font-size:  1.25rem;">
+            <pre class="brush: js; highlight:[8,9,10]">
+            /**
+             *  
+             *  defines the getter methods for retrieving restaurant data
+             **/
+             restaurantServices.factory('Restaurant', ['$resource',
+                function ($resource) {
+                    return $resource('/restaurants/:restaurantId/:reservations', {restaurantId: '@restaurantId'}, {
+                        GetRestaurant: {method: 'GET', params: {restaurantId: 'restaurantId'}, cache: true},
+                        GetAllRestaurants: {method: 'GET', params: {}, isArray: true},
+                        GetReservations: {method: 'GET', params: {restaurantId: 'restaurantId', reservations: 'reservations'}}
+                    });
+                }]);
+
+            /*  end */
+            </pre>
+            </span>
     </section>
 </section>
 <section>
     <section>
         <h3>Exercise #6 - $http to $resource</h3>
         <ol>
+            <li>Create $resource services</li>
             <li>Inject RestaurantServices into RestaurantReservationModule</li>
-            <li>Convert Services</li>
-            <li>Define Resource methods</li>
+            <li>Convert controllers</li>
         </ol>
+    </section>
+    <section>
+        <h3>Create resource services</h3>
+            <span style="font-size:  1.25rem;">
+            <pre class="brush: js; ">
+            /**
+             *  restaurantServices are defined in services.js
+             **/
+             restaurantServices.factory('Restaurant', ['$resource',
+			    function ($resource) {
+			        return $resource('/restaurants/:restaurantId/:reservations', {restaurantId: '@restaurantId'}, {
+			            GetRestaurant: {method: 'GET', params: {restaurantId: 'restaurantId'}, cache: true},
+			            GetAllRestaurants: {method: 'GET', params: {}, isArray: true},
+			            GetReservations: {method: 'GET', params: {restaurantId: 'restaurantId', reservations: 'reservations'}}
+			        });
+			    }]);
+
+			restaurantServices.factory('Reservation', ['$resource',
+			    function ($resource) {
+			        return $resource('/reservations/:reservationId', {reservationId: '@reservationId'});
+			    }
+			]);
+			
+            /*  end */
+            </pre>
+            </span>
     </section>
     <section>
         <h3>Inject RestaurantServices</h3>
             <span style="font-size:  1.25rem;">
             <pre class="brush: js; highlight:[6]">
             /**
-             *  Add the restaurantServices to the restaurantReservationModule (controllers.js)
+             *  Add the restaurantServices to the restaurantReservationController (controllers.js)
              **/
              
              var restaurantReservationModule = 
@@ -1424,9 +1499,9 @@
             </span>
     </section>
     <section>
-        <h3>Convert Services to use resource</h3>
+        <h3>Convert Controllers to use resource services</h3>
 
-            Change the RestaurantListController to use a resource rather than $http (controllers.js)
+            Change the RestaurantListController to use $resource service rather than $http (controllers.js)
              
             <span style="font-size:  1.25rem;">
             <pre class="brush: js; ">
@@ -1436,7 +1511,7 @@
                      // Use the Angular http service to retrieve the Restaurants.
                      $http.get('/restaurants').success(function (data) {
                          $scope.restaurants = data;
-                     });
+                 });
             </pre>
             </span>
 
@@ -1453,17 +1528,92 @@
             </span>
     </section>
     <section>
+        <h3>Convert Controllers to use resource services</h3>
+
+            Change the RestaurantDetailController to use $resource service rather than $http (controllers.js)
+             
+            <span style="font-size:  1.25rem;">
+            <pre class="brush: js; ">
+			restaurantReservationModule.controller('RestaurantDetailController', ['$scope', '$routeParams', '$location', 'Restaurant',
+			    function ($scope, $routeParams, $location, Restaurant) {
+			        $scope.reservation;
+			        $scope.restaurant = Restaurant.GetRestaurant({restaurantId: $routeParams.id});
+			
+			        Restaurant.GetReservations({restaurantId: $routeParams.id},
+			            function (data) {
+			                $scope.available = data.available;
+			            });
+			
+			        $scope.selectTime = function (selectedTime) {
+			            $scope.selectedTime = selectedTime;
+			        };
+			
+			    }]);
+            </pre>
+            </span>
+
+    </section>
+    <section>
+        <h3>Convert Controllers to use resource services</h3>
+
+            Change the ReservationFormController to use $resource service rather than $http (controllers.js)
+             
+            <span style="font-size:  1.25rem;">
+            <pre class="brush: js; ">
+			restaurantReservationModule.controller('ReservationFormController',['$scope','$location','Reservation',
+			    function ($scope, $location, Reservation) {
+			        $scope.makeReservation = function () {
+			            if ($scope.reservation) {
+			                $scope.reservation.restaurantId = $scope.restaurant.id;
+			                $scope.reservation.time = $scope.selectedTime;
+			            }
+			            var newReservation = new Reservation($scope.reservation);
+			
+			            // Use built-in save function (using a POST) (Non-GET are prefixed with a '$')
+			            newReservation.$save(function (reservation) {
+			                $location.path("/reservation/" + reservation.id);
+			            });
+			        };
+			
+			    }]);
+            </pre>
+            </span>
+
+    </section>
+    <section>
+        <h3>Convert Controllers to use resource services</h3>
+
+            Change the ReservationDetailController to use $resource service rather than $http (controllers.js)
+             
+            <span style="font-size:  1.25rem;">
+            <pre class="brush: js; ">
+			restaurantReservationModule.controller('ReservationDetailController', ['$scope', '$routeParams', 'Reservation', 'Restaurant',
+			    function ($scope,$routeParams, Reservation, Restaurant) {
+			        $scope.reservation = Reservation.get({reservationId: $routeParams.id}, function (reservation) {
+			            $scope.restaurant = Restaurant.GetRestaurant({restaurantId: reservation.restaurantId});
+			        });
+			    }]);
+            </pre>
+            </span>
+
+    </section>
+    <section>
         <h3>Test our results</h3>
 
         <p>Launch your node.js server and test the changes. (run.sh or run.bat)</p>
 
         <a href="http://localhost:9000/index.html" target="_blank">http://localhost:9000/index.html</a>
 
+        <p style="padding-top: 1em;">Link to solution source: </p>
         <blockquote>
-            <p>Link to solution source: </p>
-            <a href="https://github.com/NVISIA/AngularWorkshop/blob/ex6-solution/webapp/js/controllers.js"
-               target="_blank">controllers.js</a>
+            <ul>
+                <li><a href="https://github.com/NVISIA/AngularWorkshop/blob/ex6-solution/webapp/js/controllers.js" target="_blank">controllers.js</a>
+                </li>
+                <li><a href="https://github.com/NVISIA/AngularWorkshop/blob/ex6-solution/webapp/js/services.js" target="_blank">services.js</a>
+                </li>
+            </ul>
         </blockquote>
+
     </section>
     <section>
         <aside class="notes">
