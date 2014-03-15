@@ -69,23 +69,24 @@
     <div ng-controller="RestaurantListController">
         <div id="restaurant-list-main" class="large-8 medium-8 columns">
             <div class='restaurantList'>
+                <input type="text" ng-model="query" placeholder="Search for restaurant"/>
 
-                <div class="row" ng-repeat="restaurant in restaurants |filter:query:strict">
+                <div class="row" ng-repeat="restaurant in restaurants |filter:query:strict | orderBy:'name'">
                     <div class="large-12 columns">
                         <div class="callout panel">
                             <p><strong>{{restaurant.name}}</strong></p>
                             <div class="row">
                                 <div class="large-3 medium-6 small-12 columns">
-                                    <p>Price: {{restaurant.price}}</p>
+                                    <p>Price: {{restaurant.price | priceFormatter}}</p>
                                 </div>
                                 <div class="large-3 medium-6 small-12 columns">
-                                    <p>Rating: {{restaurant.rating}}</p>
+                                    <p>Rating: {{restaurant.rating | ratingFormatter}}</p>
                                 </div>
                                 <div class="large-6 medium-12 small-12 columns">
-                                    <p>Address: {{restaurant.address}}</p>
+                                    <p>Address: <span ng-bind="restaurant.address"></span></p>
                                 </div>
                             </div>
-                            <p>Description: {{restaurant.description}} </p>
+                            <p>Description: <span ng-bind="restaurant.description"></span></p>
                         </div>
                     </div>
                 </div>
