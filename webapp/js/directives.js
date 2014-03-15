@@ -22,8 +22,6 @@
  * THE SOFTWARE.
  */
 
-/** @author jgitter **/
-
 angular.module('customDirectives', [])
     .directive('nvisiaRestaurant', function() {
         return {

@@ -10,20 +10,21 @@
                     </div>
                     <div class="large-6 columns">
                         <label>Number of Guests</label>
-                        <input type="number" name="guests" placeholder="#" ng-model="reservation.guests" required/>
+                        <input type="number" name="guests" placeholder="#" ng-model="reservation.guests"/>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="large-12 columns">
                         <label>Name:</label>
-                        <input type="text" name="name" placeholder="Enter your full name"  ng-model="reservation.name" required/>
+                        <input type="text" name="name" placeholder="Enter your full name"  ng-model="reservation.name"/>
                     </div>
                 </div>
                 <div class="row">
                     <div class="large-6 medium-6 columns">
                         <label>Phone:</label>
-                        <input type="text" ng-pattern="/^1?-?(\d{3})?-?\d{3}-?\d{4}$/" name="phone" placeholder="###-###-####" ng-model="reservation.phone" required />
+                        <!-- input type="text" ng-pattern="/^1?-?(\d{3})?-?\d{3}-?\d{4}$/" name="phone" placeholder="###-###-####" ng-model="reservation.phone" required/-->
+                        <input type="text" name="phone" placeholder="###-###-####" ng-model="reservation.phone"/>
                     </div>
                     <div class="large-6 medium-6 columns">
                         <label>Email:</label>
@@ -50,18 +51,13 @@
                 </div>
                 <div class="row">
                     <div class="small-12 medium-12 large-12 small-centered columns">
-                        <button class="small radius button" ng-click="makeReservation()" ng-disabled="reservationForm.$invalid">Make Reservation</button>
+                        <button class="small radius button" ng-click="makeReservation()">Make Reservation</button>
                         <a href="#/restaurants" class="small radius secondary button">Cancel</a>
                     </div>
                 </div>
             </form>
 
             </div>
-<!--
-            <div class="error-box">
-                <ul class="error-list"></ul>
-            </div>
--->
         </div>
     </div>
 </div>
