@@ -25,6 +25,8 @@
 "use strict";
 
 var restaurantReservationApp = angular.module('restaurantReservationApp', [
+   'restaurantReservationControllers',
+   'formatters'
 ]);
 
 /*
