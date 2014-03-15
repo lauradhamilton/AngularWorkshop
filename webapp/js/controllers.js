@@ -69,17 +69,17 @@ restaurantReservationModule.controller('RestaurantDetailController', ['$scope', 
 restaurantReservationModule.controller('ReservationFormController',['$scope','$location','$http',
     function ($scope, $location, $http) {
         $scope.makeReservation = function () {
-            if ($scope.reservation){
-                $scope.reservation.restaurantId = $scope.restaurant.id;
-                $scope.reservation.time = $scope.selectedTime;
-            }
-
-            $http.post('/reservations', $scope.reservation).success(function (data) {
-                console.log([data.id]);
-                $location.path("/reservation/" + data.id);
-            })
-        };
-
+            if ($scope.reservationForm.$valid){
+                if ($scope.reservation){
+                    $scope.reservation.restaurantId = $scope.restaurant.id;
+                    $scope.reservation.time = $scope.selectedTime;
+                }
+                $http.post('/reservations', $scope.reservation).success(function (data) {
+                    console.log([data.id]);
+                    $location.path("/reservation/" + data.id);
+               })
+            };
+        }
     }])
 ;
 
