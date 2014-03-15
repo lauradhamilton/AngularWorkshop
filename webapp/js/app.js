@@ -26,10 +26,10 @@
 
 var restaurantReservationApp = angular.module('restaurantReservationApp', [
    'restaurantReservationControllers',
-   'formatters'
+   'formatters',
+   'ngRoute'
 ]);
 
-/*
 restaurantReservationApp.config(['$routeProvider',
     function ($routeProvider) {
         $routeProvider
@@ -49,4 +49,3 @@ restaurantReservationApp.config(['$routeProvider',
                 redirectTo: '/restaurants'
             });
     }]);
-*/
