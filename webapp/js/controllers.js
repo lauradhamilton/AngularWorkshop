@@ -45,7 +45,7 @@ var restaurants = [
 
 /*
 // Create a Restaurant Detail Controller
-restaurantReservationControllers.controller('RestaurantDetailController', ['$scope', '$http', '$routeParams',
+restaurantReservationModule.controller('RestaurantDetailController', ['$scope', '$http', '$routeParams',
     function ($scope, $http, $routeParams) {
         $scope.reservation;
 
@@ -63,7 +63,7 @@ restaurantReservationControllers.controller('RestaurantDetailController', ['$sco
 
 
 // Create a Reservation Form Controller
-restaurantReservationControllers.controller('ReservationFormController',['$scope','$location','$http',
+restaurantReservationModule.controller('ReservationFormController',['$scope','$location','$http',
     function ($scope, $location, $http) {
         $scope.makeReservation = function () {
             if ($scope.reservation){
@@ -82,7 +82,7 @@ restaurantReservationControllers.controller('ReservationFormController',['$scope
 
 
 // Create a Reservation Detail Controller
-restaurantReservationControllers.controller('ReservationDetailController', ['$scope', '$http', '$routeParams',
+ restaurantReservationModule.controller('ReservationDetailController', ['$scope', '$http', '$routeParams',
     function ($scope, $http, $routeParams) {
         $http.get('/reservations/'+$routeParams.id).success(function(data){
             $scope.reservation = data;
