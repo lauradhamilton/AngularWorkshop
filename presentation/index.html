@@ -789,7 +789,7 @@
          * filter 
          **/
 
-        <div class="row" ng-repeat="restaurant in restaurants | filter:query:strict">
+        <div class="row" ng-repeat="restaurant in restaurants | filter:query">
                 
         /* end */
         </pre>
@@ -847,7 +847,7 @@
         /**
          * (index.html) order the restaurant list by name 
          **/
-         ng-repeat="restaurant in restaurants |filter:query:strict | orderBy:'name'"
+         ng-repeat="restaurant in restaurants |filter:query | orderBy:'name'"
          
         /* end */
     </section>
@@ -1027,7 +1027,7 @@
              **/
 			<div class='restaurantList'>
 			    <input type="text" ng-model="query" placeholder="Search for restaurant"/>
-			    <div class="row" ng-repeat="restaurant in restaurants | filter:query:strict | orderBy:orderProp">
+			    <div class="row" ng-repeat="restaurant in restaurants | filter:query | orderBy:orderProp">
 			        <div class="large-12 columns">
 			            <div class="callout panel">
 			                <div ng-include src="'partials/restaurant.html'"/>
@@ -1780,7 +1780,7 @@
              */
 			<div class='restaurantList'>
 			    <input type="text" ng-model="query" placeholder="Search for restaurant"/>
-			    <div class="row" ng-repeat="restaurant in restaurants | filter:query:strict | orderBy:orderProp">
+			    <div class="row" ng-repeat="restaurant in restaurants | filter:query | orderBy:orderProp">
 			        <div class="large-12 columns">
 			            <div class="callout panel">
 			                <nvisia-restaurant restaurant="restaurant"></nvisia-restaurant>
@@ -1803,7 +1803,7 @@
              */
             <div class='restaurantList'>
                 <input type="text" ng-model="query" placeholder="Search for restaurant"/>
-                <div class="row" ng-repeat="restaurant in restaurants | filter:query:strict | orderBy:orderProp">
+                <div class="row" ng-repeat="restaurant in restaurants | filter:query | orderBy:orderProp">
                     <div class="large-12 columns">
                         <div class="callout panel">
                             <nvisia-restaurant restaurant="restaurant"></nvisia-restaurant>
@@ -1901,7 +1901,7 @@
     <section>
         <aside class="notes">
         </aside>
-        <h3>QUnit Testing</h3>
+        <h3>Karma Unit Testing</h3>
 
         <span style="font-size:  1.0rem;">
         <pre class="brush: js;">
@@ -2002,18 +2002,18 @@
 
     <h5>API</h5>
  
-    <p><a href="http://angularjs.org/" target="_blank">AngularJs - http://angularjs.org/</a></p>
+    <ul>
+    <li><p>AngularJs - <a href="http://angularjs.org/" target="_blank">http://angularjs.org/</a></p></li>
 
-    <p><a href="http://ngmodules.org/" target="_blank">AngularJs Modules - http://ngmodules.org/</a></p>
+    <li><p>AngularJs Modules - <a href="http://ngmodules.org/" target="_blank">http://ngmodules.org/</a></p></li>
 
-    <p><a href="http://angular-ui.github.io/bootstrap/" target="_blank">AngularJs UI - http://angular-ui.github.io/bootstrap/</a></p>
+    <li><p>AngularJs UI - <a href="http://angular-ui.github.io/bootstrap/" target="_blank">http://angular-ui.github.io/bootstrap/</a></p></li>
 
-    <p><a href="http://karma-runner.github.io/" target="_blank">Karma - http://karma-runner.github.io/</a></p>
+    <li><p>Karma - <a href="http://karma-runner.github.io/" target="_blank">http://karma-runner.github.io/</a></p></li>
 
-    <p><a href="https://github.com/angular/angularjs-batarang" target="_blank">AngularJs Batarang -
-        https://github.com/angular/angularjs-batarang</a></p>
+    <li><p>AngularJs Batarang - <a href="https://github.com/angular/angularjs-batarang" target="_blank">https://github.com/angular/angularjs-batarang</a></p></li>
 
-
+    </ul>
     <aside class="notes">
         Microsoft's opinion on SPA.
         <p><a href="http://msdn.microsoft.com/en-us/magazine/dn463786.aspx" target="_blank">Microsoft SPA with
