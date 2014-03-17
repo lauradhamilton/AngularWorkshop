@@ -1905,41 +1905,35 @@
 
         <span style="font-size:  1.0rem;">
         <pre class="brush: js;">
-         // Modify the submission of the form to check validation. (reservation.js)
-         var getReservation = function() {
-            return new Reservation.Model({
-                id: 'abc123',
-                restaurantId: 'zyx987',
-                name: 'Jerry Rice',
-                phone: '1-800-123-4567',
-                guests: 1,
-                time: new Date().getTime()
-            });
-        };
-
-        test("name-validation", function() {
-            expect(2);
-
-            var reservation = getReservation();
-            ok(reservation.isValid(true), "Check valid model");
-
-            reservation = getReservation();
-            reservation.set('name', 'A');
-            ok(reservation.isValid(true) === false, "Name is too short");
-        });
-
-        test("guests-validation", function() {
-
-        });
-
-        test("time-validation", function() {
-
-        });
-
-        test("phone-validation", function() {
-
-        });
-        // end
+	    describe('restaurantReservationControllers', function(){
+	        var scope, ctrl, $httpBackend;
+	
+	        // The injector ignores leading and trailing underscores here (i.e. _$httpBackend_).
+	        // This allows us to inject a service but then attach it to a variable
+	        // with the same name as the service.
+	        beforeEach(inject(function(_$httpBackend_, $rootScope, $controller) {
+	            $httpBackend = _$httpBackend_;
+	            $httpBackend.expectGET('/restaurants').
+	                respond(restaurantData());
+	
+	            scope = $rootScope.$new();
+	            ctrl = $controller('RestaurantListController', {$scope: scope});
+	        }));
+	
+	
+	        it('should create "restaurants" model with 2 restaurants fetched from xhr', function() {
+	            expect(scope.restaurants).toEqualData([]);
+	            $httpBackend.flush();
+	
+	            expect(scope.restaurants).toEqualData(restaurantData());
+	            expect(scope.restaurants.length).toBeGreaterThan(0);
+	        });
+	
+	
+	        it('should set the default value of orderProp model', function() {
+	            expect(scope.orderProp).toBe('name');
+	        });
+	    });
         </pre>
         </span>
     </section>
