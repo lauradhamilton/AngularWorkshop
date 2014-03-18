@@ -450,6 +450,18 @@
             <img width="60%" src="img/class-model.png"/>
         </div>
     </section>
+    <section>
+        <h3>Workshop Exercises Overview</h3>
+        <ul>
+            <li>Getting started - bootstrapping</li>
+            <li>Binding</li>
+            <li>RESTful Services</li>
+            <li>Partials & Router</li>
+            <li>Validation</li>
+            <li>Move from $http to $resources</li>
+            <li>Directives</li>
+        </ul>
+    </section>
 
 </section>
 
@@ -862,6 +874,56 @@
              <input type="text" ng-model="query" placeholder="Search for restaurant"/>
              ... ommitted ....
          </div>
+         
+        /* end */
+    </section>
+    <section>
+        <h3>ng-bind</h3>
+        <span style="font-size:  1.25rem;">
+        <pre class="brush: js; highlight:[14,17]">
+        /**
+         * (index.html) Use ng-bind to bind the Address and Description 
+         **/
+         <div class="callout panel">
+              <p><strong>{{restaurant.name}}</strong></p>
+              <div class="row">
+                  <div class="large-3 medium-6 small-12 columns">
+                    <p>Price: {{restaurant.price | priceFormatter}}</p>
+                  </div>
+                  <div class="large-3 medium-6 small-12 columns">
+                    <p>Rating: {{restaurant.rating | ratingFormatter}}</p>
+                  </div>
+                  <div class="large-6 medium-12 small-12 columns">
+                    <p>Address: <span ng-bind="restaurant.address"></span></p>
+                  </div>
+              </div>
+            <p>Description: <span ng-bind="restaurant.description"></span></p>
+          </div>
+         
+        /* end */
+    </section>
+    <section>
+        <h3>Add Formatters</h3>
+        <span style="font-size:  1.25rem;">
+        <pre class="brush: js; highlight:[8,11]">
+        /**
+         * (index.html) Add formatters 
+         **/
+         <div class="callout panel">
+              <p><strong>{{restaurant.name}}</strong></p>
+              <div class="row">
+                  <div class="large-3 medium-6 small-12 columns">
+                    <p>Price: {{restaurant.price | priceFormatter}}</p>
+                  </div>
+                  <div class="large-3 medium-6 small-12 columns">
+                    <p>Rating: {{restaurant.rating | ratingFormatter}}</p>
+                  </div>
+                  <div class="large-6 medium-12 small-12 columns">
+                    <p>Address: <span ng-bind="restaurant.address"></span></p>
+                  </div>
+              </div>
+            <p>Description: <span ng-bind="restaurant.description"></span></p>
+          </div>
          
         /* end */
     </section>
